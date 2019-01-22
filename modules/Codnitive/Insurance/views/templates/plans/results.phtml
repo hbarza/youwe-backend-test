@@ -1,0 +1,11 @@
+<div class="home2"></div>
+<?= $breadcrumbs ?>
+<?php //if (!$plans) return; ?>
+<?= $this->render('_search.info.phtml', ['plans' => $plans, 'params' => $params]) ?>
+<section class="mb-5 mt-2">
+    <div class="container">
+        <div class="row">
+            <?= $this->render('_plans.list.phtml', ['plans' => $plans, 'params' => $params]) ?>
+        </div>
+    </div>
+</section>

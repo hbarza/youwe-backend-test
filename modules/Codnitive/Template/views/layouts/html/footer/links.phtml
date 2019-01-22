@@ -1,0 +1,73 @@
+<div class="footer-link ">
+    <div class="row">
+        <div class="col-lg-8 col-md-9 col-sm-12">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="footer_title"><?= __('template', 'Ticket') ?></div>
+                    <aside class="f_widget categories_widget categories_widget2">
+                        <ul>
+                            <!-- <li><a href="#"><i class="fa fa-angle-double-left" aria-hidden="true"></i><?= __('template', 'Airplane') ?></a></li> -->
+                            <!-- <li><a href="#"><i class="fa fa-angle-double-left" aria-hidden="true"></i><?= __('template', 'Train') ?></a></li> -->
+                            <li><a href="<?= tools()->getUrl('', ['tab' => 'box-bus']) ?>"><i class="fa fa-angle-double-left" aria-hidden="true"></i><?= __('template', 'Bus') ?></a></li>
+                            <li><a href="<?= tools()->getUrl('', ['tab' => 'box-insurance']) ?>"><i class="fa fa-angle-double-left" aria-hidden="true"></i><?= __('template', 'Insurance') ?></a></li>
+                            <!-- <li><a href="#"><i class="fa fa-angle-double-left" aria-hidden="true"></i><?= __('template', 'Hotel') ?></a></li> -->
+                        </ul>
+                        <ul>
+                            <!-- <li><a href="#"><i class="fa fa-angle-double-left" aria-hidden="true"></i><?= __('template', 'Tour') ?></a></li> -->
+                            <!-- <li><a href="#"><i class="fa fa-angle-double-left" aria-hidden="true"></i><?= __('template', 'Event') ?></a></li> -->
+                            <!-- <li><a href="#"><i class="fa fa-angle-double-left" aria-hidden="true"></i><?= __('template', 'Car Rent') ?></a></li> -->
+                        </ul>
+                    </aside>
+                </div>
+                <div class="col-lg-5 col-md-6 col-sm-12">
+                    <div class="footer_title"><?= __('template', 'Useful Links') ?></div>
+                    <aside class="f_widget categories_widget categories_widget2">
+                        <ul>
+                            <li><a href="<?= tools()->getUrl() ?>"><i class="fa fa-angle-double-left" aria-hidden="true"></i><?= __('template', 'Home') ?></a></li>
+                            <li><a href="<?= tools()->getUrl('about-us') ?>"><i class="fa fa-angle-double-left" aria-hidden="true"></i><?= __('template', 'About Us') ?></a></li>
+                            <li><a href="<?= tools()->getUrl('contact-us') ?>"><i class="fa fa-angle-double-left" aria-hidden="true"></i><?= __('template', 'Contact Us') ?></a></li>
+                            <li><a href="<?= tools()->getUrl('terms-and-conditions') ?>"><i class="fa fa-angle-double-left" aria-hidden="true"></i><?= __('template', 'Terms and Conditions') ?></a></li>
+                        </ul>
+                        <!-- <ul>
+                            <li><a href="#"><i class="fa fa-angle-double-left" aria-hidden="true"></i><?= __('template', 'How to Buy') ?></a></li>
+                            <li><a href="#"><i class="fa fa-angle-double-left" aria-hidden="true"></i><?= __('template', 'Job Seek') ?></a></li>
+                            <li><a href="#"><i class="fa fa-angle-double-left" aria-hidden="true"></i><?= __('template', 'Partnership') ?></a></li>
+                        </ul> -->
+                    </aside>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="footer_title"><?= __('template', 'Account') ?></div>
+                    <aside class="f_widget categories_widget">
+                        <ul>
+                            <?php $loginRoute = 'account'; ?>
+                            <?php if (tools()->isGuest()): ?>
+                            <?php $loginRoute = 'user/login'; ?>
+                            <li><a href="<?= tools()->getUrl('user/registration/register') ?>"><i class="fa fa-angle-double-left" aria-hidden="true"></i><?= __('template', 'Sign Up') ?></a></li>
+                            <?php endif ?>
+                            <li><a href="<?= tools()->getUrl($loginRoute) ?>"><i class="fa fa-angle-double-left" aria-hidden="true"></i><?= __('template', 'Sign In') ?></a></li>
+                            <li><a href="<?= tools()->getUrl('account') ?>"><i class="fa fa-angle-double-left" aria-hidden="true"></i><?= __('template', 'Account') ?></a></li>
+                            <!-- <li><a href="#"><i class="fa fa-angle-double-left" aria-hidden="true"></i><?= __('template', 'Track Ticket') ?></a></li> -->
+                        </ul>
+                    </aside>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-3 col-sm-12">
+            <div class="d-flex flex-column justify-content-center">
+                <div class="box-logo-footer">
+                <img src="<?= tools()->getImageUrl('footer-elements1.png') ?>" alt="">
+                </div>
+                <div class="box-enamad mt-4 d-felx justify-content-center text-center mb-2">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4">
+                            <img src="<?= tools()->getImageUrl('enamad.png') ?>" alt="">
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <img src="<?= tools()->getImageUrl('samandehi.png') ?>" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

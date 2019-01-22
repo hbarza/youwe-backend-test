@@ -1,0 +1,62 @@
+<?php 
+    $block = new \app\modules\Codnitive\Insurance\blocks\Plans\Registration;
+    $block->registerAssets($this, 'Insurance', 'Insurance');
+    $block->html()->setNameSpace('insurance_registration');
+?>
+<div class="home2"></div>
+<?= $breadcrumbs ?>
+
+<div class="bus-check container mb-4 mt-2" id="scroller-anchor-main">
+    <?php $form = $block->beginForm([
+        'action' => tools()->getUrl('insurance/plans/confirm'),
+        // 'method'  => 'POST',
+        'id' => 'insurance_registration_form',
+        // 'options' => [
+        //     'method' => 'post',
+        //     'id' => 'insurance_registration_form'
+        // ]
+    ]); ?>
+    <div class="d-flex flex-column ">
+        <div class="d-flex flex-row">
+            <div class="col-md-9 pd-right">
+                <div class="d-flex flex-column">
+                    <div class="box-shadow">
+                        <?php if (tools()->isGuest()): ?>
+                        <?= $this->render('@app/modules/Codnitive/Template/views/templates/quick_login.phtml') ?>
+                        <?php endif; ?>
+                        <div class="p-3">
+                            <?= $this->render('/templates/plans/registration/form.phtml', [
+                                'emptyModel' => $emptyModel, 
+                                'model' => $model, 
+                                'passengers' => $passengers,
+                                'block' => $block,
+                                'form' => $form
+                            ]) ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?= $this->render('/templates/plans/sidebar.phtml', [
+                'step' => 'registration', 
+                'model' => $model, 
+                'block' => $block,
+                'form' => $form,
+                'emptyModel' => $emptyModel, 
+                'data' => $block->getInsuranceData()
+            ]) ?>
+        </div>
+    </div>
+    <?php $block->endForm(); ?>
+</div>
+
+<div class="passenger-info-wrapper hidden" data-index="<?= count($passengers) ?>">
+    <?php $block->html()->setIndex(9999999999); ?>
+    <?= $this->render('/templates/plans/registration/form/passenger.form.phtml', [
+        'model'       => $emptyModel,
+        'block'       => $block,
+        'form'        => $form,
+        'class'       => '',
+        'cloneSample' => true,
+        'showOptionals' => false
+    ]) ?>
+</div>

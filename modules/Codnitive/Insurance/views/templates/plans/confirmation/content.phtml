@@ -1,0 +1,54 @@
+<?php if (isset($allInsurances[0]) && true !== (new app\modules\Codnitive\Insurance\models\Travis)->errorCheck($allInsurances[0])): ?>
+<div class="container my-5">
+    <div class="alert alert-warning"><span class="fa fa-warning"></span>
+    <?= $allInsurances[0]->errorText ?>
+    </div>
+</div>
+<?php return; ?>
+<?php endif; ?>
+
+<div class="d-flex flex-row flex-lg-row flex-md-row flex-sm-row align-items-center justify-content-between flex-column p-3">
+    <h5 class="d-flex">
+        <i class="fa fa-info-circle pink mr-2 ml-0"></i>
+        <?= __('insurance', 'Please check your information and proced to checkout if you confirm those.') ?>
+    </h5>
+</div>
+<hr>
+
+<div class="col-xs-12 section-of-confirm-info confirm-applicant-info mt-4">
+    <div class="d-flex justify-content-between">
+        <h4 class="head-of-info-ticket d-flex"><i class="fas fa-ticket-alt mr-2 color"></i> <span><?= __('insurance', 'Passangers List') ?></span></h4>
+        <?php /*<div class="d-flex"><?= __('insurance', 'Plan Name') ?>: <?= $allInsurances[0]->plan->title ?></div>*/ ?>
+        <?php /*<div class="d-flex"><?= __('insurance', 'Destination Country') ?>: <?= $allInsurances[0]->country->title ?></div>*/ ?>
+    </div>
+    <hr>
+    <div class="parent-table-confirm-info table-responsive">
+        <table class="table style-table">
+            <thead class="force-color-default">
+            <tr>
+                <th></th>
+                <th><?= __('insurance', 'Customer Name') ?></th>
+                <th><?= __('insurance', 'National ID') ?></th>
+                <th><?= __('insurance', 'Passport No.') ?></th>
+                <th><?= __('insurance', 'Visa Type') ?></th>
+                <th><?= __('insurance', 'Status') ?></th>
+                <th><?= __('insurance', 'Price') ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php $grandTotal = (new app\modules\Codnitive\Insurance\models\Insurance)->getGrandTotal($allInsurances); ?>
+            <?php $i = 1; ?>
+            <?php foreach ($allInsurances as $index => $data): ?>
+                <?= $this->render('_passengers_info.phtml', ['data' => $data, 'i' => $i++]) ?>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="info-box clearfix mt-3 p-3">
+    <hr>
+    <a href="<?= tools()->getUrl('insurance/plans/registration') ?>" class="col-sm-2 col-xs-12 float-left back-link force-color-default"><?= __('template', 'Back') ?></a>
+</div>
+<!-----------------right-section------------------------>

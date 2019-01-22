@@ -1,0 +1,139 @@
+// (function($){
+var tixox = {
+    // // baseUrl: 'http://www.tixox.com/', // TODO change URL
+    // baseUrl: 'http://tixox/',
+
+    addFieldSet: function(tabContentSelector, contentDestination, tabDestination)
+    {
+        var tabContent  = $(tabContentSelector);
+        var pattern     = tabContent.find('.tab-pattern-wrapper');
+        var baseContent = pattern.find('.tab-content-wrapper');
+        var baseTab     = pattern.find('.tab-item-wrapper');
+        var index       = parseInt(pattern.attr('data-index'));
+        var newTab      = tixox.clearClone(baseTab.html(), index);
+        var contentHtml = tixox.clearClone(baseContent.html(), index);
+        var contentId   = '#'+tixox.clearClone(baseContent.find('.form-fields-wrapper').prop('id'), index);
+
+        if (tabDestination === undefined) {
+            tabDestination = '.tab-items';
+        }
+        if (contentDestination === undefined) {
+            contentDestination = '.tab-contents';
+        }
+        tabContent.find(tabDestination).append(newTab);
+        tabContent.find(contentDestination).append(contentHtml);
+
+        codnitive.initFileinput(contentId);
+        codnitive.initWysiwygEditor(contentId);
+        // codnitive.initDatePicker(contentId);
+        codnitive.initTimePicker(contentId);
+        tixox.changeScheduletypeObserver();
+
+        var tabItem = tabContent.find('.tab-'+index);
+        // codnitive.changeTab(tabContent.find('.tab-'+index));
+        pattern.attr('data-index', index+1);
+        return tabItem;
+    },
+
+    removeFieldSet: function (id, cloneSample)
+    {
+        var msg = 'Are you sure you want delete it?';
+        if (!confirm(msg)) {
+            return false;
+        }
+        $('#'+id).remove();
+        var tabItem = $('[data-tab-id='+id+']');
+        var tabItemsWrapper = tabItem.parent('.tab-items');
+        tabItem.remove();
+        var firstTabItem = tabItemsWrapper.children('.tab-item:first-child');
+        codnitive.changeTab(firstTabItem);
+        return !cloneSample;
+    },
+
+    clearClone: function(str, index, patern)
+    {
+        if (str === undefined) {
+            return str;
+        }
+        if (patern === undefined) {
+            patern = /9999999999/g;
+        }
+        return str.replace(patern, index)
+                .replace(/text-area/g, 'textarea')
+                .replace(/fi-le/g, 'file');
+    },
+
+    // saveSpeakers: function()
+    // {
+    //     var speakersData = $(".speakers-tabs.tab-content form").serialize();
+    //     // console.log($(".speakers-tabs.tab-content form"));
+    //     // return;
+    //     this.ajax(this.baseUrl+'event/account/saveSpeaker', speakersData);
+    // }
+
+    deleteGridRow: function(deleteUrl)
+    {
+        if (confirm('Are you sure to delete it?')) {
+            window.location.href = deleteUrl;
+        }
+        return false;
+    },
+
+    openMessageModal: function(entityId, entityType)
+    {
+        $('#message_modal #nitification_message_form').show();
+        $('#message_modal #send_notification').show();
+        $('#message_modal .modal-flash-message').html('');
+        $('#message_modal #message-message').val('');
+        $('#message_modal #message-entity_id').val(entityId);
+        $('#message_modal #message-entity_type').val(entityType);
+        $('#message_modal').modal('show');
+    },
+
+    sendNotification: function()
+    {
+        codnitive.ajax(
+            codnitive.baseUrl+'message/ajax/add',
+            $('#nitification_message_form').serializeArray()
+        );
+        $('#message_modal #nitification_message_form').hide();
+        $('#message_modal #send_notification').hide();
+    },
+
+    getLastNewMessages: function()
+    {
+        codnitive.ajax(
+            codnitive.baseUrl+'message/ajax/new'
+        );
+    },
+
+    saveEvent: function()
+    {
+        if (days = tixox.checkScheduleDays()) {
+            $('#event-event_days_new').val(days);
+            $('#event-manager').submit();
+            return true;
+        }
+        return false;
+    },
+
+    checkScheduleDays: function()
+    {
+        var startDate   = $('#event-start_date').val();
+        var endDate     = $('#event-end_date').val();
+        var eventDays   = parseInt($('#event-event_days').val());
+        var daysBetween = codnitive.daysBetween(startDate, endDate, 1);
+        if (daysBetween < eventDays) {
+            var msg = "You changed event dates, and the event days are less than what you saved before, we will remove extra days in schedule days. \
+            \nAre you sure you want save event with new dates?";
+            return confirm(msg) ? daysBetween : 0;
+            // return confirm(msg) ? eventDays - daysBetween : 0;
+        }
+        return true;
+    }
+}
+
+// $(document).ready(function () {
+//     codnitive.addFieldSet('#speaker-form-base');
+// });
+// })(jQuery);

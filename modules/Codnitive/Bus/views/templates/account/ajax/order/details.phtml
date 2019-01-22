@@ -1,0 +1,120 @@
+<?php 
+app()->getModule('bus');
+$data  = $item->product_data;
+
+// @todo <<< remove
+// $item->ticket_id = 'TQM8E';
+// $item->ticket_provider = 'nira';
+// $data['reservation']['provider'] = 'nira';
+// $data['selected_bus']['company_id'] = 'RO'; 
+// $data['selected_bus']['origin_id'] = 'THB';
+
+
+// $item->ticket_id = '3795456';
+// $item->ticket_provider = 'safar';
+// $data['reservation']['provider'] = 'safar';
+// >>> remove
+
+$block = new \app\modules\Codnitive\Bus\blocks\Process\Confirm;
+// $ticket = [];
+// if (!empty($item->ticket_id)) {
+//     $ticket = $block->getDataProvider()->getTicket($item->ticket_id, $data);
+//     $print  = $block->getDataProvider()->getTicketPrintData($ticket, $order);
+// }
+// var_dump($print);
+?>
+<div class="d-flex flex-column p-3 grid-ticket-detail bus-details">
+  <div class="d-flex flex-row box-info">
+    <div class="d-flex col-1 bd-left2 no-padding align-items-center justify-content-center fz-20 bg-gray">
+      <i class="fa fa-bus blue"></i>
+    </div>
+    <div class="d-flex col-5 flex-column bd-left2 no-padding ">
+      <div class="d-flex flex-row ">
+        <div class="d-flex  bd-left2 col-6 no-padding justify-content-center py-4">
+          <p><?= $data['origin_name'] ?> - <?= $data['reservation']['boarding'] ?></p>
+        </div>
+        <div class="d-flex  col-6 no-padding justify-content-center py-4">
+          <p><?= $data['destination_name'] ?> - <?= $data['reservation']['dropping'] ?></p>
+        </div>
+      </div>
+      <div class="d-flex  bd-top justify-content-center">
+        <p class="blue mt-3"><?= $data['reservation']['company'] ?></p>
+      </div>
+    </div>
+    <div class="d-flex col-4 flex-column no-padding ">
+      <div class="d-flex flex-row bd-bottom justify-content-center py-2">
+        <span><?= __('bus', 'Departure Date') ?>: </span><span class="ml-2 mr-0"><?= $block->getDate($data['reservation']['departure']) ?></span>
+      </div>
+      <div class="d-flex flex-row bd-bottom justify-content-center py-2">
+        <span><?= __('bus', 'Departure Time') ?>: </span><span class="ml-2 mr-0"><?= $block->getTime($data['reservation']['departure']) ?></span>
+      </div>
+      <div class="d-flex flex-row bd-bottom justify-content-center py-2">
+        <span><?= __('bus', 'Seats Count') ?>: </span><span class="ml-2 mr-0"><?= count(explode(',', $data['reservation']['seat_numbers'])) ?></span>
+      </div>
+      <div class="d-flex flex-row justify-content-center p-2">
+        <span><?= __('bus', 'Seat Numbers') ?>: </span><span class="ml-2 mr-0 ltr inline-block"><?= str_replace(',', ', ', $data['reservation']['seat_numbers']) ?></span>
+      </div>
+    </div>
+    <div class="d-flex col-2 no-padding flex-column p-2 bd-right  ">
+      <?php if ($block->setDataProvider($data['reservation']['provider'])->showPnr()): ?>
+      <div class="d-flex flex-column bd-bottom align-items-center">
+        <span class="d-flex"><?= __('bus', 'PNR') ?></span>
+        <p class="d-flex ml-2 blue"><?= $item->ticket_id ?></p>
+      </div>
+      <?php endif; ?>
+      <div class="d-flex flex-column align-items-center mt-3 ticket-number">
+        <span class="d-flex"><?= __('bus', 'Ticket Number') ?></span>
+        <?php foreach (explode(',', $item->ticket_number) as $ticketNumber): ?>
+        <p class="d-flex ml-2 blue"><?= $ticketNumber ?></p>
+        <?php endforeach ?>
+      </div>
+    </div>
+  </div>
+  <?php if (!empty($item->ticket_id)): ?>
+  <div class="d-flex flex-row box-info justify-content-end">
+    <div class="d-flex p-3">
+      <?php if ($item->canRefund()): ?>
+      <a href="<?= tools()->getUrl('account/bus/ticket', ['id' => $item->id]) ?>" class="btn  mr-auto submit_btn2" target="_blank"><?= __('template', 'Print Ticket') ?></a>
+      <div class="d-flex ml-auto">
+        <button
+          class="btn submit_btn2 ml-2 mr-0"
+          data-toggle="modal"
+          data-target="#bus_refund_modal_<?= $item->id ?>"
+        >
+          <?= __('template', 'Refund') ?>
+        </button>
+      </div>
+      
+      <!-- <<< Modal -->
+      <div class="modal fade bd-example-modal-md" data-backdrop="static" 
+        data-keyboard="false" id="bus_refund_modal_<?= $item->id ?>" tabindex="-1" role="dialog" aria-labelledby="ticketRefundModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+          <div class="modal-content">
+            <div class="modal-body modal-body-refound">
+              <h5 class="mt-2 blue text-center bd-bottom p-2"><?= __('template', 'Ticket Refund') ?></h5>
+              <p class="mt-2 p-2 fz-14">
+                <?= __('bus', 'You are canceling ticket # {ticket_id}, are you sure?', ['ticket_id' => $item->ticket_id]) ?>
+                <br>
+                <?= __('template', 'Please note ticket cancelation can be included refund penalty.') ?>
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal"><?= __('template', 'Cancel') ?></button>
+              <button type="button" class="btn-blue"><a href="<?= tools()->getUrl('account/sales/refund', ['id' => $item->id]) ?>" class="text-white"><?= __('template', 'Yes Agree') ?></a></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- >>> Modal -->
+
+      <?php else: ?>
+      <div class="d-flex ml-auto ml-2 mr-0">
+        <button class="btn submit_btn2 ml-2 mr-0 disabled" disabled="disabled">
+          <?= __('sales', 'Refunded') ?>
+        </button>
+      </div>
+      <?php endif ?>
+    </div>
+  </div>
+  <?php endif ?>
+</div>

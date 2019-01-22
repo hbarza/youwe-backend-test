@@ -1,0 +1,26 @@
+<?= $this->render('_toolbar.phtml'); ?>
+<div class="clearfix"></div>
+
+<section class="mb-5 mt-2">
+    <div class="container">
+        <div class="row">
+        <?php if (empty($buses)): ?>
+            <div class="col-12 mt-5 text-center">
+                <?= __('bus', 'Unfotunalty no result found for your search, please change your search parameters.') ?>
+            </div>
+        <?php else: ?>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 mt-4 filter sidebar">
+            <?= $this->render('_filter.phtml', ['buses' => $buses]); ?>
+            </div>
+            <!-----------------right-section------------------------>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 list results">
+                <?= $this->render('_results.phtml', ['buses' => $buses]); ?>
+            </div>
+        <?php endif; ?>
+
+        <script type="text/javascript">
+            bilit.updateSearchResultCount(<?= count($buses) ?>);
+        </script>
+        </div>
+    </div>
+</section>

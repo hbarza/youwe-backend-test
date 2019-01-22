@@ -1,0 +1,38 @@
+<?php
+$block = new \app\modules\Codnitive\Bus\blocks\Process\Confirm($data);
+$block->registerAssets($this, 'Bus', 'Bus');
+?>
+<div class="home2"></div>
+<?= $breadcrumbs ?>
+
+<div class="bus-check container mb-4 mt-2" id="scroller-anchor-main">
+    <div class="d-flex flex-column ">
+        <div class="d-flex flex-row">
+            <div class="col-md-9 pd-right">
+                <div class="d-flex flex-column">
+                    <div class="box-shadow">
+                        <p class="check-data-tips__item p-3">
+                            <i class="fa fa-info-circle ml-2"></i> 
+                            <?= __('bus', 'Please check your information and pay, if you are sure they are correct.') ?>
+                        </p>
+                        <hr>
+                        <?= $this->render('confirm/seatmap.phtml', [
+                            'block' => $block,
+                            'seatMap' => $data['reservation']['seatmap'], 
+                            'rowsCount' => $data['reservation']['rows_count'],
+                            'seatNumbers' => $data['reservation']['seat_numbers']
+                        ]) ?>
+                        <hr>
+                        <?php /* coupon code block goes here */ ?>
+                        <?= $this->render('confirm/overview.phtml', ['block' => $block]) ?>
+                    </div>
+                </div>
+            </div>
+            <?= $this->render('/templates/process/sidebar.phtml', [
+                'step' => 'confirm', 
+                // 'model' => $model, 
+                'data' => $data
+            ]) ?>
+        </div>
+    </div>
+</div>

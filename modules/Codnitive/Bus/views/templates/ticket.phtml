@@ -1,0 +1,103 @@
+<div class="col-10 ticket">
+    <div class="d-flex flex-lg-row flex-md-row flex-sm-row flex-column box-bus-item p-2 mt-5 ticket-info">
+        <div class="icon d-flex justify-content-center align-items-center"><img src="<?= tools()->getImageUrl('Logo_orange_pointer.svg'); ?>" alt="<?= __('template', 'Bilit.com') ?>"></div>
+        <div class="col-md-2 right-box-bus d-flex justify-content-center align-items-center">
+            <span class="d-flex ticket-number" ><?= $ticket['pnr'] ?? $ticket['ticket_number'][0] ?></span>
+        </div>
+        <div class="col-md-10  flex-column  left-box-bus  align-items-center no-padding">
+            <div class="d-flex flex-row justify-content-between px-3 py-3 box-ticket-info">
+                <div class="d-flex passenter-name">
+                    <span class="titel mr-2 ml-0"><?= strtoupper(__('bus', 'Passenger Name: ')) ?></span>
+                    <span><?= $ticket['fullname'] ?></span>
+                </div>
+                <div class="d-flex issue-date">
+                    <span class="ml-0 mr-2"><?= __('bus', 'Issue Date: ') ?></span>
+                    <span><?= str_replace('-', '/', $ticket['issue_date']) ?>&nbsp;<?= $ticket['issue_time'] ?></span>
+                </div>
+            </div>
+            <div class="d-flex flex-row ">
+                <div class="col-8 no-padding">
+                    <div class="d-flex flex-column">
+                        <div class="d-flex flex-column box-ticket-one p-3">
+                            <div class="d-flex flex-row justify-content-between">
+                                <div class="d-flex flex-column">
+                                    <h2 class="d-flex"><i class="fa fa-map-marker mr-2 ml-0 color"></i><?= __('bus', 'Origin City and Terminal') ?></h2>
+                                    <p class="d-flex ml-2"><?= $ticket['origin'] ?><?= $ticket['boarding'] ? " - {$ticket['boarding']}" : '' ?></p>
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <h2 class="d-flex"><i class="fa fa-map-marker mr-2 ml-0 color"></i><?= __('bus', 'Destination City and Terminal') ?></h2>
+                                    <p class="d-flex ml-2"><?= $ticket['destination'] ?><?= $ticket['dropping'] ? " - {$ticket['dropping']}" : '' ?></p>
+                                </div>
+                            </div>
+                            <h2 class="d-flex mt-3"><i class="fa fa-bus mr-2 ml-0 color"></i><?= __('bus', 'Company') ?></h2>
+                            <p class="d-flex ml-2 mb-0"><?= $ticket['company'] ?></p>
+                        </div> 
+                        <div class="d-flex flex-row justify-content-between p-3 align-item-center">
+                            <div class=" d-flex flex-column tall-line-height">
+                                <h2 class="d-flex "><i class="fa fa-clock-o mr-2 ml-0 color"></i><?= __('bus', 'Departure Date and Time') ?></h2>
+                                <p class="ml-2"><?= str_replace('-', '/', $ticket['departure_date']) ?>&nbsp;<?= $ticket['departure_time'] ?></p>
+                            </div>
+                            <div class="d-flex flex-column tall-line-height">
+                                <h2 class="d-flex lh-40"><span class="icon-seat-3 mr-2 ml-0 color"></span><?= __('bus', 'Seats Count') ?></h2>
+                                <p class="d-flex ml-2 justify-content-center"><?= $ticket['seats_count'] ?></p>
+                            </div>
+                            <div class="d-flex flex-column tall-line-height">
+                                <h2 class="d-flex lh-40">
+                                <span class="icon-seat-4 mr-2 ml-0 color"></span><?= __('bus', 'Seat Numbers') ?></h2>
+                                <p class="d-flex ml-2 justify-content-center"><?= $ticket['seat_numbers'] ?></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 no-padding box-ticket-number d-flex justify-content-center p-3">
+                    <div class="d-flex flex-column">
+                        <div class="d-flex flex-column ">
+                            <h2 class="d-flex"><i class="fa fa-info mr-2 ml-0 color"></i><?= __('bus', 'Order Number') ?></h2>
+                            <p class="d-flex ml-2"><?= $ticket['order_number'] ?></p>
+                        </div>
+                        <div class="d-flex flex-column ">
+                            <h2 class="d-flex"><i class="fa fa-info mr-2 ml-0 color"></i><?= __('bus', 'Payment Trace Number') ?></h2>
+                            <p class="d-flex ml-2"><?= $ticket['payment_trace_number'] ?></p>
+                        </div>
+                        <?php if (!empty($ticket['pnr'])): ?>
+                        <div class="d-flex flex-column ">
+                            <h2 class="d-flex"><i class="fa fa-info mr-2 ml-0 color"></i><?= __('bus', 'PNR') ?></h2>
+                            <p class="d-flex ml-2"><?= $ticket['pnr'] ?></p>
+                        </div>
+                        <?php endif ?>
+                        <div class="d-flex flex-column">
+                            <h2 class="d-flex"><i class="fas fa-ticket-alt mr-2 ml-0 color"></i><?= __('bus', 'Ticket Number') ?></h2>
+                            <?php foreach ($ticket['ticket_number'] as $ticketNumber): ?>
+                            <p class="d-flex ml-2 mb-0"><?= $ticketNumber ?></p>
+                            <?php endforeach ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-row justify-content-between px-3 py-3 box-ticket-rull ">
+                <div class="d-flex flex-item col-8 no-padding ">
+                    <div class="d-flex flex-column p-3">
+                    <h2><i class="fa fa-exclamation-triangle mr-2 ml-0 mb-3"></i><?= __('bus', 'Terms') ?></h2>
+                    <ul class="rull-ticket">
+                        <li><?= __('bus', 'You should arrive 30 minutes before departure time, to boarding terminal and receive a printed ticket with your ticket number.') ?></li>
+                        <li><?= __('bus', 'Based on traveling company terms, refund penalty is 10 percent till 1 hour after issue time and after that it is 50 percent.') ?></li>
+                    </ul>
+                </div> 
+                </div>
+                <div class="d-flex flex-item col-4 no-padding justify-content-end align-self-item-center ">
+                    <div class="d-flex flex-column p-3">
+                        <?php /*<h2><i class="fa fa-dollor mr-3 ml-0"></i><?= __('bus', 'Price') ?></h2>*/ ?>
+                        <div class="total-price-ticket"><?= tools()->formatRial($ticket['seats_count'] * $ticket['price']) ?></div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php if (isset($print) && $print): ?>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        window.print();
+    });
+    </script>
+<?php endif; ?>

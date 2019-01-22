@@ -1,0 +1,67 @@
+<?php 
+app()->getModule('insurance');
+$data = $item->getAttributes()['product_data'];
+?>
+<div class="d-flex flex-column p-3 grid-ticket-detail insurance-details">
+    <div class="d-flex flex-row box-info">
+        <div class="d-flex col-1 bd-left2 no-padding align-items-center justify-content-center fz-20 bg-gray">
+            <span class="icon-insurance blue"></span>
+        </div>
+        <div class="d-flex col-5 flex-column bd-left2 no-padding ">
+            <div class="d-flex flex-row ">
+                <div class="d-flex  bd-left2 col-6 no-padding justify-content-center py-4">
+                    <p><?= __('insurance', 'Country') ?> - <?= $data['country']['title'] ?></p>
+                </div>
+                <div class="d-flex  col-6 no-padding justify-content-center py-4">
+                    <p><?= __('insurance', 'Duration of Stay') ?> - <?= $data['durationOfStay'] ?></p>
+                </div>
+            </div>
+            <div class="d-flex  bd-top justify-content-center">
+                <p class="blue mt-3"><?= $data['plan']['title'] ?></p>
+            </div>
+        </div>
+        <div class="d-flex col-4 flex-column no-padding ">
+            <div class="d-flex flex-row bd-bottom justify-content-center py-2">
+                <span><?= __('insurance', 'Issue Date') ?>: </span>
+                <span class="ml-2 mr-0"><?= tools()->getFormatedDate($data['issueDate'], 'Y/m/d') ?></span>
+            </div>
+            <div class="d-flex flex-row bd-bottom justify-content-center py-2">
+                <span><?= __('insurance', 'Insured') ?>: </span>
+                <span class="ml-2 mr-0"><?= $data['customer']['firstName'] ?> <?= $data['customer']['lastName'] ?></span>
+            </div>
+            <div class="d-flex flex-row bd-bottom justify-content-center py-2">
+                <span><?= __('insurance', 'Visa Type') ?>: </span>
+                <span class="ml-2 mr-0"><?= tools()->getOptionValue('Insurance', 'VisaType', $data['travelKind']) ?></span>
+            </div>
+            <div class="d-flex flex-row justify-content-center p-2">
+                <span><?= __('insurance', 'Passport No.') ?>: </span>
+                <span class="ml-2 mr-0"><?= $data['passportNo'] ?></span>
+            </div>
+        </div>
+        <div class="d-flex col-2 no-padding flex-column p-2 bd-right  ">
+            <div class="d-flex flex-column bd-bottom align-items-center insurance-policy-number">
+                <span class="d-flex"><?= __('insurance', 'Policy No.') ?></span>
+                <span class="d-flex ml-2 blue mb-1"><?= $item->ticket_number ?></span>
+            </div>
+            <div class="d-flex flex-column  align-items-center mt-3">
+                <span class="d-flex"><?= __('insurance', 'Insurance Serial No.') ?></span>
+                <p class="d-flex ml-2 blue"><?= $item->ticket_id ?></p>
+            </div>
+        </div>
+    </div>
+    <?php if (!empty($item->ticket_id)): ?>
+    <div class="d-flex flex-row box-info justify-content-end">
+        <div class="d-flex p-3">
+            <?php if (!empty($data['pdfPolicy'])): ?>
+            <a href="<?= $data['pdfPolicy'] ?>" class="btn  mr-auto submit_btn2" target="_blank"><?= __('insurance', 'Download Policy') ?></a>
+            <?php endif; ?>
+            <?php if (3 == $data['status']): ?>
+            <div class="d-flex ml-auto">
+                <button class="btn submit_btn2 ml-2 mr-0" data-toggle="modal" data-target="#myModalpass2" ><?= __('template', 'Refund') ?></button>
+            </div>
+            <?php endif ?>
+            <?php /* refund popup placeholder */ ?>
+        </div>
+    </div>
+    <?php endif ?>
+</div>

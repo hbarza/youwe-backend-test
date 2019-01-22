@@ -1,0 +1,115 @@
+<?php if (empty($bus)): ?>
+<div class="my-2 text-center"><?= __('bus', 'Unfortunately we couldn\'t find bus detail, please try again or select another bus.') ?></div>
+<?php else: ?>
+    <?php
+    $block     = new \app\modules\Codnitive\Bus\blocks\Bus;
+    $formModel = new \app\modules\Codnitive\Bus\models\SeatReserveForm;
+    $seatMap   = $block->getSeatMap($bus);
+    $rowsCount = $block->getRowsCount($bus);
+    $block->html()->setNameSpace('busSeat');
+    ?>
+
+    <div class="clearfix seat-map bus-rows-<?= $rowsCount ?>">
+        <div class="seats busBack"></div>
+    </div>
+    <div class="d-flex align-items-end justify-content-center my-2">
+
+        <?php $form = $block->beginForm([
+            'action'  => [$block->getActionUrl()],
+            'id'      => 'bus_seat_reserve',
+            'method'  => 'GET'
+        ]); ?>
+        <div>
+            <div class="fields-wrapper">
+            <?= $block->html()->getHiddenField($form, $formModel, 'provider', ['hidden_input_options' => ['value' => $bus['provider']]]); ?>
+            <?= $block->html()->getHiddenField($form, $formModel, 'bus_id', ['hidden_input_options' => ['value' => $bus['bus_id']]]); ?>
+            <?= $block->html()->getHiddenField($form, $formModel, 'price', ['hidden_input_options' => ['value' => $bus['price']]]); ?>
+            <?= $block->html()->getHiddenField($form, $formModel, 'discount', ['hidden_input_options' => ['value' => $bus['discount']]]); ?>
+            <?= $block->html()->getHiddenField($form, $formModel, 'company', ['hidden_input_options' => ['value' => $bus['company']]]); ?>
+            <?= $block->html()->getHiddenField($form, $formModel, 'boarding', ['hidden_input_options' => ['value' => $bus['boarding']]]); ?>
+            <?= $block->html()->getHiddenField($form, $formModel, 'dropping', ['hidden_input_options' => ['value' => $bus['dropping']]]); ?>
+            <?= $block->html()->getHiddenField($form, $formModel, 'departure', ['hidden_input_options' => ['value' => $bus['departure']]]); ?>
+            <?= $block->html()->getHiddenField($form, $formModel, 'seatmap', ['hidden_input_options' => ['value' => \yii\helpers\Json::encode($seatMap)]]); ?>
+            <?= $block->html()->getHiddenField($form, $formModel, 'rows_count', ['hidden_input_options' => ['value' => $rowsCount]]); ?>
+            <?= $block->html()->getHiddenField($form, $formModel, 'seat_numbers'); ?>
+            </div>
+            <button class="btn submit_btn2"><?= __('bus', 'Buy') ?></button>
+        </div>
+        <?php $block->endForm(); ?>
+    </div>
+
+
+    <script>
+    <?php 
+    /**
+     * @reference https://www.jqueryscript.net/chart-graph/Full-featured-Seating-Chart-Plugin-With-jQuery-Seat-Charts.html
+     * @reference https://github.com/mateuszmarkowski/jQuery-Seat-Charts
+     */
+    ?>
+    $(document).ready(function() {
+        seatMap = $('.seat-map .seats').seatCharts({
+            map: [
+                <?php foreach ($seatMap as $col): ?>
+                    '<?= $col ?>',
+                <?php endforeach; ?>
+            ],
+            seats: {
+                a: {
+                    classes : 'available',
+                    category: 'Available'
+                },
+                m: {
+                    classes : 'male-booked',
+                    category: 'Booked by Male'
+                },
+                f: {
+                    classes : 'female-booked',
+                    category: 'Booked by Female'
+                }
+            },
+            naming : {
+                top : false,
+                left: false,
+                getLabel: function (character, row, column) {
+                    return null;
+                }
+            },
+            legend : {
+                node : $('.seat-map #legend'),
+                    items : [
+                        [ 'a', 'available',   'Available' ],
+                        [ 'm', 'unavailable', 'Booked by Male'],
+                        [ 'f', 'unavailable', 'Booked by Female']
+                    ]         
+            },
+            click: function () {
+                if (this.status() == 'available') {
+                    var seats = $('#bus_seat_reserve #busseat-seat_numbers').val();
+                    seats += ',' + this.settings.id;
+                    $('#bus_seat_reserve #busseat-seat_numbers').val(seats.ltrim(','));
+                    return 'selected';
+                } 
+                else if (this.status() == 'selected') {
+                    var seats = $('#bus_seat_reserve #busseat-seat_numbers').val()
+                        .replace(this.settings.id, '')
+                        .replace(',,', ',')
+                        .rtrim(',')
+                        .ltrim(',');
+                    $('#bus_seat_reserve #busseat-seat_numbers').val(seats);
+                    //seat has been vacated
+                    return 'available';
+                } 
+                else if (this.status() == 'unavailable') {
+                    //seat has been already booked
+                    return 'unavailable';
+                } 
+                else {
+                    return this.style();
+                }
+            }
+    });
+    seatMap.get(<?= $block->getUnavailableSeats($bus) ?>).status('unavailable');
+    busSearchResultListSort.isotope();
+    });
+    </script>
+<?php endif; ?>

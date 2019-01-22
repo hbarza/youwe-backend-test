@@ -1,0 +1,171 @@
+<?php
+
+namespace app\modules\Codnitive\Sales\models;
+
+use Yii;
+use yii\db\Transaction;
+use yii\helpers\Json;
+// use yii\web\ServerErrorHttpException;
+use app\modules\Codnitive\Core\models\ActiveRecord;
+use app\modules\Codnitive\Core\helpers\Rules;
+use app\modules\Codnitive\Core\helpers\Tools;
+use app\modules\Codnitive\Core\helpers\Data;
+use app\modules\Codnitive\Sales\models\Order\Item;
+use app\modules\Codnitive\Sales\models\System\Source\OrderStatus;
+use app\modules\Codnitive\Message\models\Message\Relation;
+
+class Order extends ActiveRecord
+{
+    protected $_arrayFields = ['billing_data', 'payment_info'];
+
+    public $order_number;
+    public $fullname;
+    public $email;
+    public $status_label;
+    
+    /**
+     * @return string the name of the table associated with this ActiveRecord class.
+     */
+    public static function tableName()
+    {
+        return '{{sales_order}}';
+    }
+
+    public function afterFind()
+    {
+        $billingAddress     = Json::decode($this->getAttributes()['billing_data']);
+        $this->order_number = $this->getOrderNumber();
+        $this->fullname     = $billingAddress['fullname'] ?? '';
+        $this->email        = $billingAddress['email'] ?? '';
+        $this->status_label  = Tools::getOptionValue('Sales', 'OrderStatus', $this->status);
+    }
+
+    public function rules()
+    {
+        $rules = [
+            [['customer_id', /*'merchant_id', */'status', 'grand_total', 'order_date',
+                'ticket_type', 'payment_info', 'billing_data', 'payment_method'
+            ], 'safe'],
+
+            // [['billing_data', 'payment_method'
+            // ], 'required'],
+
+            // Rules::string('ticket_type', [3, 255]),
+            // Rules::string('payment_info'),
+            // Rules::pattern('status', '/\d{1,3}/'),
+            // Rules::number('grand_total', 0.0, 99999999999.9999),
+            // Rules::string('billing_data'),
+            // Rules::string('payment_method', [3, 255]),
+        ];
+        return $rules;
+    }
+
+    // public function attributeLabels()
+    // {
+    //     return [
+    //     //     'fullname'  => __('user', 'Full Name'),
+    //         /* 'name'            => 'Event Name',
+    //         'sub_title'       => 'Title',
+    //         'start_date'      => 'Event Date',
+    //         'primary_phone'   => 'Phone',
+    //         'images'          => 'Image',
+    //         'media'           => 'Upload Images and Videos',
+    //         'location_hidden' => 'Location', */
+    //     ];
+    // }
+
+    public function saveOrder(array $checkoutData, $cart)
+    {
+        $data = [
+            'customer_id'       => $this->_getUserId(),
+            // 'status'            => (new OrderStatus)->getOptionIdByValue(OrderStatus::PENDING),
+            'status'            => (new OrderStatus)->getOptionIdByValue(OrderStatus::PENDING_PAYMENT),
+            'grand_total'       => $cart->getTotalCost(),
+            'billing_data'   => $checkoutData['billing'],
+            'payment_method'    => $checkoutData['payment_method'],
+            // 'payment_info'      => $checkoutData[$checkoutData['payment_method']],
+            'order_date'        => date('Y-m-d H:i:s'),
+        ];
+        
+        if ($result = $this->setData($data)->save()) {
+            $result = $this->_saveItems($cart);
+        }
+        return $result ? $this : $result;
+    }
+
+    protected function _saveItems($cart)
+    {
+        $items = $cart->getItems();
+        try {
+            $transaction = Yii::$app->db->beginTransaction(
+                Transaction::SERIALIZABLE
+            );
+            foreach ($items as $item) {
+                if (!($result = (new Item)->saveOrderItem($this, $item))) {
+                    throw new \Exception($result);
+                }
+                (new Relation)->saveMessageRelation($item, $this->id);
+            }
+            $transaction->commit();
+        }
+        catch (\Exception $e) {
+            $transaction->rollBack();
+            $errorNumber = Data::log($e, 'SmOI');
+            // throw new ServerErrorHttpException($errorNumber);
+            Data::setFlash('danger', "Error occurred when saving order.\n<br>" . $errorNumber);
+            return false;
+        }
+        return $result;
+    }
+
+    public function getItems()
+    {
+        $item     = new Item;
+        $items    = $item->setOrderId($this->id);
+        if ($this->_isReceivedOrders()) {
+            $items->andWhere(['merchant_id' => $this->_getUserId()]);
+        }
+        return $items->getCollection();
+    }
+
+    public function getOrderNumber($url = false, $orderId = 0)
+    {
+        $orderId = $orderId ?: $this->id;
+        $orderNumber = sprintf('1%011d', $orderId);
+        if (!Tools::isGuest() && $url) {
+            $orderNumber = '<a href="'.$this->getOrderUrl($orderId).'">'.$orderNumber.'</a>';
+        }
+        return $orderNumber;
+    }
+
+    public function getGrandTotal($items)
+    {
+        $grandTotal = $this->grand_total;
+        if ($this->_isReceivedOrders()) {
+            $grandTotal = 0;
+            foreach ($items as $item) {
+                $grandTotal += $item->qty * $item->price;
+            }
+        }
+        return $grandTotal;
+    }
+
+    public function getOrderUrl($orderId = 0)
+    {
+        return Tools::getUrl(
+            'account/sales/order', 
+            ['id' => $orderId ?: $this->id]
+        );
+    }
+
+    protected function _isReceivedOrders()
+    {
+        return boolval(Yii::$app->request->get('received'));
+    }
+
+    protected function _getUserId()
+    {
+        return Tools::getUser()->getId();
+    }
+
+}

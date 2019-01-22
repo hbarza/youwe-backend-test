@@ -1,0 +1,63 @@
+
+<?php 
+if (isset($item)) {
+    $data = $item->product_data;
+}
+$showSeats = false;
+if (!isset($block)) {
+    app()->getModule('bus'); 
+    $block = new \app\modules\Codnitive\Bus\blocks\Process\Confirm($data);
+    $showSeats = true;
+}
+?>
+<ul class="order-info">
+    <?php if (isset($item) && !empty($item->ticket_number)): ?>
+    <li>
+        <i class="fa fa-bus ml-2"></i>
+        <span class="ml-2"><?= __('bus', 'Ticket Number(s)') ?>:</span>
+        <span><?= str_replace(',', ' - ', $item->ticket_number) ?></span>
+    </li>
+    <?php endif; ?>
+    <li>
+        <i class="fa fa-bus ml-2"></i>
+        <span class="ml-2"><?= __('bus', 'Company') ?>:</span>
+        <span><?= $data['reservation']['company'] ?></span>
+    </li>
+    <li>
+        <i class="fa fa-map-marker ml-2"></i>
+        <span class="ml-2"><?= __('bus', 'Origin City') ?>:</span>
+        <span><?= $data['origin_name'] ?></span>
+    </li>
+    <li>
+        <i class="fa fa-map-marker ml-2"></i>
+        <span class="ml-2"><?= __('bus', 'Boarding') ?>:</span>
+        <span><?= $data['reservation']['boarding'] ?></span>
+    </li>
+    <li>
+        <i class="fa fa-map-marker ml-2"></i>
+        <span class="ml-2"><?= __('bus', 'Destination City') ?>:</span>
+        <span><?= $data['destination_name'] ?></span>
+    </li>
+    <li>
+        <i class="fa fa-map-marker ml-2"></i>
+        <span class="ml-2"><?= __('bus', 'Dropping') ?>:</span>
+        <span><?= $data['reservation']['dropping'] ?></span>
+    </li>
+    <li>
+        <i class="fa fa-calendar ml-1"></i>
+        <span class="ml-2"><?= __('bus', 'Date') ?>:</span>
+        <span  class="ltr inline-block"><?= $block->getDate($data['reservation']['departure']) ?></span>
+    </li>
+    <li>
+        <i class="fa fa-clock-o ml-1"></i>
+        <span class="ml-2"><?= __('bus', 'Time') ?>:</span>
+        <span class="ltr inline-block"><?= $block->getTime($data['reservation']['departure']) ?></span>
+    </li>
+    <?php if ($showSeats): ?>
+    <li>
+        <i class="fa fa-bus ml-1"></i>
+        <span class="ml-2"><?= __('bus', 'Seat Numbers') ?>:</span>
+        <span class="ltr inline-block"><?= str_replace(',', ', ', $data['reservation']['seat_numbers']) ?></span>
+    </li>
+    <?php endif; ?>
+</ul>

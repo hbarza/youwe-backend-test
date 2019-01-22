@@ -1,0 +1,9 @@
+<tr>
+    <td><?= $i ?></td>
+    <td><?= $data->customer->firstName ?> <?= $data->customer->lastName ?></td>
+    <td><?= $data->customer->nationalCode ?></td>
+    <td><?= $data->passportNo ?></td>
+    <td><?= tools()->getOptionValue('Insurance', 'VisaType', $data->travelKind )?></td>
+    <td><?= tools()->getOptionValue('Insurance', 'Status', $data->status )?></td>
+    <td><?= tools()->formatPrice($data->price->priceGross, 0) ?></td>
+</tr>

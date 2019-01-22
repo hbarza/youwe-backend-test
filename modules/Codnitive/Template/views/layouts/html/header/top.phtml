@@ -1,0 +1,31 @@
+<!-- Top Bar -->
+<div class="top_bar">
+    <div class="container">
+            <div class="d-flex flex-row  justify-content-between col-11 pl-6">
+                <ul class="top_bar_content d-flex flex-row align-items-center justify-content-start">
+                    <?php /*<?= $this->render('_lang.phtml'); ?>*/ ?>
+
+                    <?php if (tools()->isGuest()): ?>
+                        <li class="top-bar-item"><a href="<?= tools()->getUrl('user/login', ['prev_url' => app()->request->url]); ?>"><i class="fa fa-user-plus color mr-1 ml-0"></i><?= __('template', 'Sign In / Sign Up') ?></a></li>
+                    <?php else: ?>
+                        <li class="top-bar-item"><a href="<?= tools()->getUrl('user/logout'); ?>"><i class="fas fa-sign-out-alt color mr-1 ml-0"></i><?= __('template', 'Sign Out') ?></a></li>
+                        <?php /*<li class="top-bar-item"><a href="<?= tools()->getUrl('account'); ?>"><i class="fa fa-user-plus color mr-1 ml-0"></i><?= __('template', 'Account') ?></a></li>*/ ?>
+                        <li class="top-bar-item"><a href="<?= tools()->getUrl('account'); ?>"><i class="fa fa-user-plus color mr-1 ml-0"></i><?= tools()->getUser()->identity->fullname ?? __('template', 'Welcome') ?></a></li>
+                    <?php endif; ?>
+
+                    <?php /* <li class="top-bar-item">
+                        <a href=""><i class="fa fa-user color mr-1 ml-0"></i><?= __('template', 'Customers Club') ?></a>
+                    </li>
+                    <li class="top-bar-item">
+                        <a href=""><i class="fas fa-ticket-alt color mr-1 ml-0"></i><?= __('template', 'Ticket Refaund') ?></a>
+                    </li>
+                    <li class="top-bar-item">
+                        <a href=""><i class="fa fa-gamepad color mr-1 ml-0"></i><?= __('template', 'Bilit Games') ?></a>
+                    </li>*/ ?>
+                </ul>
+                <div class="d-flex align-items-center header-phone">
+                    <span class="color-white hover-color-white"><?= __('template', '021&nbsp;72149') ?></span><i class="fa fa-phone color mr-2"></i>
+                </div>
+            </div>
+    </div>
+</div>

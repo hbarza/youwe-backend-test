@@ -1,0 +1,48 @@
+<div class="box-shadow col-md-3 px-3 py-2 align-self-start sidebar sticky-box">
+    <div class="d-flex flex-column justify-content-center ">
+        <ul class="sidebar-item-car">
+            <li class="my-2">
+                <span class="gray d-block mb-1">
+                    <i class="fa fa-umbrella mr-2 ml-0 color"></i> <span><?= __('insurance', 'Plan Name') ?></span>
+                </span>
+                <p class="mb-2"><?= $data['plan_title'] ?></p>
+            </li>
+            <li class="my-2">
+                <span class="gray d-block mb-1">
+                    <i class="fa fa-globe fz-10 mr-2 ml-0 color"></i> <span class="gray"><?= __('insurance', 'Destination Country') ?></span>
+                </span>
+                <p class="mb-2"><?= $data['country_name'] ?> - <?= __('insurance', '{duration} Days', $data) ?></p>
+            </li>
+        </ul>
+        <?php if ($step == 'registration'): ?>
+        <div class="info-box__rules clearfix mt-3 terms-and-conditions">
+            <div class="rule">
+                <?php 
+                    $termsLabel = __(
+                        'insurance', 
+                        'I am agree with <a href="{terms}" target="_blank">all terms</a> and <a href="{insurance_terms}" target="_blank">Saman insurance terms</a>.',
+                        ['terms' => tools()->getUrl('terms-and-conditions'), 'insurance_terms' => tools()->getUrl('terms-and-conditions', ['#' => 'collapseThree3'])]
+                        // ['terms' => tools()->getUrl('terms-and-conditions'), 'insurance_terms' => tools()->getUrl('insurance-terms-and-conditions')]
+                    ) 
+                ?>
+                <?= $block->html()->getCheckboxList($form, $emptyModel, 'terms', [1 => '']) ?>
+                <label for="insurance_registration-terms-0" class="required"><?= $termsLabel ?></label>
+            </div>
+            <div class="d-flex f mb-3 col-12 mt-5">
+                <?= $block->html()->submitButton(
+                    __('insurance', 'Continue Shopping'), 
+                    [
+                        'class' => 'btn btn-purple',
+                        'id' => 'insurance_registration_form_submit',
+                    ]
+                ) ?>
+            </div>
+        </div>
+        <?php elseif ($step == 'confirm'): ?>
+            <div class="sidebar-payment-methods-wrapper">
+            <?php /*<?= $this->render('sidebar/payment.phtml', ['block' => $block]) ?>*/ ?>
+            </div>
+        <?php endif ?>
+    </div>
+</div>
+                

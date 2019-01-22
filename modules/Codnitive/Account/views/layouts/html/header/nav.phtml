@@ -1,0 +1,31 @@
+
+<div class="header-2">
+    <div class="container">
+        <div class="header_content d-flex flex-row  justify-content-between col-11 pl-6">
+            <div class="main-menubar d-flex align-items-center">
+                <nav class="hide">
+                    <!-- <a href="#home"><?= __('template', 'Airplane'); ?></a> -->
+                    <!-- <a href="#service"><?= __('template', 'Train'); ?></a> -->
+                    <a href="<?= tools()->getUrl('', ['tab' => 'box-bus']) ?>"><?= __('template', 'Bus'); ?></a>
+                    <!-- <a href="#consultant"><?= __('template', 'Hotel'); ?></a> -->
+                    <!-- <a href=""><?= __('template', 'Tour'); ?></a> -->
+                    <!-- <a href=""><?= __('template', 'Event'); ?></a> -->
+                    <a href="<?= tools()->getUrl('', ['tab' => 'box-insurance']) ?>"><?= __('template', 'Insurance'); ?></a>
+                    <!-- <a href=""><?= __('template', 'Car Rent'); ?></a> -->
+                </nav>
+                <div class="menu-bar"><span class="fa fa-bars color"></span></div>
+            </div>
+            <?php if (tools()->showProcessCheckout()): ?>
+            <div class="d-flex align-items-center">
+                <a class="color-white hover-color-white" href="<?= tools()->getUrl('checkout/cart') ?>">
+                    <?= __('template', 'Process Checkout'); ?>
+                    <i class="fa fa-shopping-cart color mr-2"></i>
+                </a>
+            </div>
+            <?php endif ?>
+        </div>
+
+    </div>
+    <!-- End Header Area -->
+    <?= $this->render('_logo.phtml'); ?>
+</div>

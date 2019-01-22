@@ -1,0 +1,10 @@
+(function($){
+    // $(document).ready(function () {
+        codnitive.autoChangeTab();
+        codnitive.tabClick();
+        codnitive.changePerPage();
+        codnitive.initWysiwygEditor('body')
+            .initDatePicker('body')
+            .initTimePicker('body');
+    // });
+})(jQuery);

@@ -1,0 +1,15 @@
+<?php
+
+$block     = new app\modules\Codnitive\Template\blocks\About;
+$configs   = $block->getConfigs();
+// $activeTab = 'box-bus';
+
+?>
+<section class="about">
+    <?php foreach ($configs as $config): ?>
+    <div id="<?= str_replace('box', 'about', $config['name']) ?>"
+        class="about-wrapper">
+            <?= $this->render($config['about_template']) ?>
+    </div>
+    <?php endforeach ?>
+</section>

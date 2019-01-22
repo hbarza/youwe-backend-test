@@ -1,0 +1,54 @@
+
+<?php 
+app()->getModule('insurance');
+// var_dump($item->getAttributes());
+// exit;
+$data = $item->product_data;
+?>
+<ul class="order-info">
+    <li>
+        <i class="fa fa-info ml-2"></i>
+        <span class="ml-2"><?= __('insurance', 'Country') ?>:</span>
+        <span><?= $data['country']['title'] ?></span>
+    </li>
+    <li>
+        <i class="fa fa-info ml-2"></i>
+        <span class="ml-2"><?= __('insurance', 'Duration of Stay') ?>:</span>
+        <span><?= $data['durationOfStay'] ?></span>
+    </li>
+    <li>
+        <i class="fa fa-info ml-2"></i>
+        <span class="ml-2"><?= __('insurance', 'Insured') ?>:</span>
+        <span><?= $data['customer']['firstName'] ?> <?= $data['customer']['lastName'] ?></span>
+    </li>
+    <li>
+        <i class="fa fa-info ml-2"></i>
+        <span class="ml-2"><?= __('insurance', 'Insurance Serial No.') ?>:</span>
+        <span><?= $item->ticket_id ?></span>
+    </li>
+    <li>
+        <i class="fa fa-info ml-2"></i>
+        <span class="ml-2"><?= __('insurance', 'Policy No.') ?>:</span>
+        <span><?= $item->ticket_number ?></span>
+    </li>
+    <li>
+        <i class="fa fa-info ml-2"></i>
+        <span class="ml-2"><?= __('insurance', 'Passport No.') ?>:</span>
+        <span><?= $data['passportNo'] ?></span>
+    </li>
+    <li>
+        <i class="fa fa-info ml-2"></i>
+        <span class="ml-2"><?= __('insurance', 'Visa Type') ?>:</span>
+        <span><?= tools()->getOptionValue('Insurance', 'VisaType', $data['travelKind']) ?></span>
+    </li>
+    <li>
+        <i class="fa fa-info ml-2"></i>
+        <span class="ml-2"><?= __('insurance', 'Issue Date') ?>:</span>
+        <span class="inline-block ltr"><?= tools()->getFormatedDate($data['issueDate'], 'Y-m-d H:i') ?></span>
+    </li>
+    <li>
+        <i class="fa fa-info ml-2"></i>
+        <span class="ml-2"><?= __('insurance', 'Status') ?>:</span>
+        <span><?= tools()->getOptionValue('Insurance', 'Status', $item->ticket_status ?? $data['status']) ?></span>
+    </li>
+</ul>

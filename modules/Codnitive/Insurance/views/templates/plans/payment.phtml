@@ -1,0 +1,39 @@
+<div class="home2"></div>
+<?= $breadcrumbs ?>
+
+<div class="clearfix"></div>
+<section class="mb-0 mt-2">
+    <div class="container">
+        <div class="container my-5">
+            <div class="alert alert-danger"><span class="fa fa-times"></span>
+            <?= __('insurance', 'This is temporary step to make sure plan registration works. In production this page will redirect customer to payment gateway.') ?>
+            </div>
+        </div>
+        <div class="container my-5">
+            <div class="alert alert-success"><span class="fa fa-check"></span>
+            <?= __('insurance', 'You will be redirect to payment gateway in few second, please be patient...') ?>
+            </div>
+        </div>
+
+        <div class="container my-5">
+            <div class="alert alert-warning"><span class="fa fa-exclamation-triangle"></span>
+                <?php /*<table class="text-left">
+                    <tr><th class="px-5 py-2"><?= __('insurance', 'Status') ?></th><td class="px-5 py-2"><?= tools()->getOptionValue('Insurance', 'Status', $insurance->status) ?></td></tr>
+                    <tr><th class="px-5 py-2"><?= __('insurance', 'Visa Type') ?></th><td class="px-5 py-2"><?= tools()->getOptionValue('Insurance', 'VisaType', $insurance->travelKind) ?></td></tr>
+                    <tr><th class="px-5 py-2"><?= __('insurance', 'Agent Code') ?></th><td class="px-5 py-2"><?= $insurance->agentCode ?></td></tr>
+                    <tr><th class="px-5 py-2"><?= __('insurance', 'Insurance Serial No.') ?></th><td class="px-5 py-2"><?= $insurance->bimehNo ?></td></tr>
+                    <tr><th class="px-5 py-2"><?= __('insurance', 'Policy No.') ?></th><td class="px-5 py-2"><?= $insurance->policyNo ?></td></tr>
+                    <tr><th class="px-5 py-2"><?= __('insurance', 'Passport No.') ?></th><td class="px-5 py-2"><?= $insurance->passportNo ?></td></tr>
+                    <tr><th class="px-5 py-2"><?= __('insurance', 'Issue Date') ?></th><td class="px-5 py-2"><?= $insurance->issueDate ?></td></tr>
+                    <tr><th class="px-5 py-2"><?= __('insurance', 'Duration of Stay') ?></th><td class="px-5 py-2"><?= $insurance->durationOfStay ?></td></tr>
+                    <tr><th class="px-5 py-2"><?= __('insurance', 'Cancelation Date') ?></th><td class="px-5 py-2"><?= $insurance->cancelDate ?></td></tr>
+                </table>*/ ?>
+                <button id="confirm_insurance" class="btn info-box__btn-return btn-warning btn-outline col-sm-2 col-xs-12 btn-purple">
+                    <?php /*<a href="<?= tools()->getUrl('insurance/plans/success', ['insurance_serial_no' => $insurance->bimehNo]); ?>"><?= __('insurance', 'Confirm Insurance') ?></a>*/ ?>
+                    <a href="<?= tools()->getUrl('insurance/plans/success'); ?>"><?= __('insurance', 'Confirm Insurance') ?></a>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+<hr>
