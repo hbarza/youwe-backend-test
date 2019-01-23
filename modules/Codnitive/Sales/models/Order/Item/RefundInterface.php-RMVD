@@ -1,9 +1,0 @@
-<?php 
-
-namespace app\modules\Codnitive\Sales\models\Order\Item;
-
-interface RefundInterface
-{
-    public function canRefund(): bool;
-    public function refund();
-}

@@ -17,10 +17,6 @@ $config = [
         'core',
         'language',
         'template',
-        // 'account',
-        
-        // extra modules to load
-        // 'insurance',
     ],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
@@ -29,7 +25,7 @@ $config = [
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'Hra_c2PMshWw5TNOsUb-JzGJWhW615SkO',
+            'cookieValidationKey' => 'Hra_c2PhWw5TNOsUb-JzGJWhs9e615SkO',
         ],
         'cache' => [
             // 'class' => 'yii\caching\FileCache',
@@ -64,31 +60,6 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
-        ],
-        */
-        /*'urlManager' => [
-            'class' => 'yii\web\UrlManager',
-            // Disable index.php
-            'showScriptName' => false,
-            // Disable r= routes
-            'enablePrettyUrl' => true,
-            'enableStrictParsing' => false,
-            // 'suffix' => '.html',
-            'rules' => [
-                    '<controller:\w+>' => '<controller>/index',
-                    'account/<action:\w+>' => 'account/index/<action>',
-                    // 'account/<action:\w+>' => 'account/index/<action>',
-                    '<controller:\w+>/<id:\d+>' => '<controller>/view',
-                    '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-                    '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-            ],
-        ],*/
         'i18n' => [
             'translations' => [
                 '*' => [
@@ -110,12 +81,6 @@ $config = [
 
 require __DIR__ . '/web/url_manager.php';
 require __DIR__ . '/web/codnitive.php';
-require __DIR__ . '/web/user.php';
-require __DIR__ . '/web/cart.php';
-
-// echo '<pre>';
-// print_r($config);
-// exit;
 
 if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment

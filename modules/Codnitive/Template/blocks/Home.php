@@ -7,11 +7,11 @@ use app\modules\Codnitive\Core\blocks\Template;
 
 class Home extends Template
 {
-    public function getConfigs()
-    {
-        CoreModule::loadModules(app()->params['modules']['products']);
-        $products = app()->params['products'];
-        ksort($products);
-        return $products;
-    }
+    // public function getConfigs()
+    // {
+    //     CoreModule::loadModules(app()->params['modules']['products']);
+    //     $products = app()->params['products'];
+    //     ksort($products);
+    //     return $products;
+    // }
 }

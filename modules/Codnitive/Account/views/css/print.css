@@ -1,7 +1,0 @@
-.right-box-bus,
-.ticket-info > div:first-child,
-.fa,
-.fas,
-span[class*=icon-] {
-    display: none !important;
-}
