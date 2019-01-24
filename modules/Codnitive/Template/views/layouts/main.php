@@ -14,9 +14,9 @@ $block->registerAssets($this, 'Template', 'Main');
 <head>
     <script>var BASE_URL = '<?= tools()->getUrl('', [], false, true) ?>';</script>
     <meta charset="<?= app()->charset ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="bilit.com official website, to book and buy train, airplane, bus, car, event, insurance, tour tickets">
+    <meta name="description" content="Omid Barza backend test for Youwe Co.">
     <?= tools()->csrfMetaTags() ?>
     <title><?= tools()->encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -33,12 +33,11 @@ $block->registerAssets($this, 'Template', 'Main');
 <?php endif; ?>
 <?= $this->render('html/_breadcrumbs.phtml'); ?>
 <?= $this->render('html/_message.phtml'); ?>
-<?= $content ?>
-<?= $this->render('html/footer.phtml'); ?>
 
-<?php if (app()->language == 'fa-IR'): ?>
-<?php $block->registerAssets($this, 'Template', 'JqueryValidateFa') ?>
-<?php endif; ?>
+<div class="wrapper">
+<?= $content ?>
+</div>
+<?= $this->render('html/footer.phtml'); ?>
 
 <?php $block->registerAssets($this, 'Template', 'CustomJS'); ?>
 <?php $this->endBody() ?>

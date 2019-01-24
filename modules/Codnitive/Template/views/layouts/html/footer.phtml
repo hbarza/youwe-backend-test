@@ -1,18 +1,12 @@
-
-<?php if (tools()->isHomePage()): ?>
-<?= $this->render('footer/contact_home.phtml') ?>
-<?php else: ?>
-<?= $this->render('footer/contact.phtml') ?>
-<?php endif; ?>
-
 <footer class="footer">
-    <?= $this->render('footer/social.phtml') ?>
-    <div class="footer_container">
-        <div class="container">
-        <?php /*<?= $this->render('footer/menu.phtml') ?>*/ ?>
-        <?= $this->render('footer/links.phtml') ?>
+    <div class="container">
+    <div class="row">
+        <div class="col-md-3">
+        <h1 class="title">Omid</h1>
         </div>
+        <?= $this->render('footer/links.phtml') ?>
+        <?= $this->render('footer/social.phtml') ?>
     </div>
-    <?= $this->render('footer/copyright.phtml') ?>
+    </div>
 </footer>
-<?= $this->render('@app/modules/Codnitive/Template/views/templates/scroll_to_top.phtml') ?>
+<?= $this->render('footer/copyright.phtml') ?>

@@ -19,24 +19,25 @@ class Main extends AssetBundle
 {
     // public $basePath = '@webroot';
     public $baseUrl = '@web';
-    public $sourcePath = '@app/modules/Codnitive/Template/views';
+    public $sourcePath = '@app/modules/Codnitive/Template/views/assets';
     public $css = [
-        // 'https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round',
-        'css/bootstrap.min.css',
-        // 'css/bootstrap-rtl.min.css',
-        'css/font-awesome.all.min.css',
-        'css/style-font.css',
-        'css/style.css',
-        // 'css/main-styles-rtl.css',
-        // 'css/respnsive-rtl.css',
-        // ['css/print.css', 'media' => 'print'],
+        'https://use.fontawesome.com/releases/v5.0.6/css/all.css',
+        'css/nucleo-icons.css',
+        'css/blk-design-system.css?v=1.0.0',
+        'demo/demo.css',
     ];
     public $jsOptions = ['position' => \yii\web\View::POS_END];
     public $js = [
-        // 'js/jquery-3.2.1.min.js',
-        'js/popper.min.js',
-        'js/bootstrap.min.js',
-        'js/jquery.validate.min.js',
+        'js/core/popper.min.js',
+        'js/core/bootstrap.min.js',
+        'js/plugins/perfect-scrollbar.jquery.min.js',
+        'js/plugins/bootstrap-switch.js',
+        'js/plugins/nouislider.min.js',
+        'js/plugins/chartjs.min.js',
+        'js/plugins/moment.min.js',
+        'js/plugins/bootstrap-datetimepicker.js',
+        'demo/demo.js',
+        'js/blk-design-system.min.js?v=1.0.0"',
         'js/codnitive.js',
     ];
     public $depends = [

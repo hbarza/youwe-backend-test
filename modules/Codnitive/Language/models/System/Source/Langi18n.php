@@ -7,9 +7,8 @@ class Langi18n extends \app\modules\Codnitive\Core\models\System\Source\OptionsA
     public function optionsArray()
     {
         return [
-            'def' => 'fa-IR',
+            'def' => 'en-US',
             'en'  => 'en-US',
-            'fa'  => 'fa-IR',
         ];
     }
 }

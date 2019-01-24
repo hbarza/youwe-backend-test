@@ -18,15 +18,10 @@ use yii\web\AssetBundle;
 class HeadJS extends AssetBundle
 {
     public $baseUrl = '@web';
-    public $sourcePath = '@app/modules/Codnitive/Template/views';
+    public $sourcePath = '@app/modules/Codnitive/Template/views/assets';
     
     public $jsOptions = ['position' => \yii\web\View::POS_HEAD];
     public $js = [
-        'js/jquery-3.2.1.min.js',
+        'js/core/jquery.min.js',
     ];
-    // public $depends = [
-    //     // 'app\modules\Codnitive\Template\assets\Main',
-    //     'yii\web\YiiAsset',
-    //     'yii\bootstrap\BootstrapAsset',
-    // ];
 }

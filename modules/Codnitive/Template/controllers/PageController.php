@@ -2,9 +2,7 @@
 
 namespace app\modules\Codnitive\Template\controllers;
 
-// use Yii;
 use yii\web\Controller;
-// use app\modules\Codnitive\Core\helpers\Tools;
 
 class PageController extends Controller
 {
@@ -22,7 +20,6 @@ class PageController extends Controller
         $this->_request = app()->request;
         app()->language = tools()->getLanguage();
         $this->layout   = '@app/modules/Codnitive/Template/views/layouts/main';
-        // $this->view->defaultExtension = app()->getModule('template')->params['defaultExtension'];
         unset($this->view->params['active_menu']);
         return parent::beforeAction($action);
     }

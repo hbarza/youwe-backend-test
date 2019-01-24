@@ -18,10 +18,9 @@ use yii\web\AssetBundle;
 class CustomCSS extends AssetBundle
 {
     public $baseUrl = '@web';
-    public $sourcePath = '@app/modules/Codnitive/Template/views';
+    public $sourcePath = '@app/modules/Codnitive/Template/views/assets';
     public $css = [
         'css/custom.css',
-        'css/bilit.css',
     ];
     public $depends = [
         'app\modules\Codnitive\Template\assets\Main',

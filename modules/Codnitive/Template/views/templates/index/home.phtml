@@ -1,17 +1,22 @@
 <?php
-
-/* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
-/* @var $model app\modules\Codnitive\Setup\models\Database */
-
-// use yii\helpers\Html;
-// use yii\bootstrap\ActiveForm;
-
-// use app\modules\Codnitive\Template\assets\Home;
-// Home::register($this);
 $block = new \app\modules\Codnitive\Core\blocks\Template;
-$block->registerAssets($this, 'Template', 'ZebraDatepicker');
 
-$this->title = __('template', 'Bilit | Home Page');
+$this->title = __('template', 'Youwe Backend Test');
 ?>
 
+<div class="page-header header-filter">
+    <div class="squares square1"></div>
+    <div class="squares square2"></div>
+    <div class="squares square3"></div>
+    <div class="squares square4"></div>
+    <div class="squares square5"></div>
+    <div class="squares square6"></div>
+    <div class="squares square7"></div>
+    <div class="container">
+    <div class="content-center brand">
+        <h1 class="h1-seo">YOUWE</h1>
+        <h3>A backend test to find best developers, Poker chance and String Graph. <br>Find those from top Getting Started menu</h3>
+    </div>
+    </div>
+</div>
+<?= $this->render('home/projects.phtml') ?>

@@ -158,7 +158,7 @@ class Tools /*extends Html*/
 
     public static function getLang()
     {
-        return app()->request->get('lang', 'fa');
+        return app()->request->get('lang', 'en');
     }
 
     public static function getLanguage()

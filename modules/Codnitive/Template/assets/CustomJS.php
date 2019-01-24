@@ -18,12 +18,11 @@ use yii\web\AssetBundle;
 class CustomJS extends AssetBundle
 {
     public $baseUrl = '@web';
-    public $sourcePath = '@app/modules/Codnitive/Template/views';
+    public $sourcePath = '@app/modules/Codnitive/Template/views/assets';
     
     public $jsOptions = ['position' => \yii\web\View::POS_END];
     public $js = [
         'js/custom.js',
-        'js/bilit.js',
     ];
     public $depends = [
         'app\modules\Codnitive\Template\assets\Main',

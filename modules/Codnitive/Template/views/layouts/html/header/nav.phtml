@@ -1,31 +1,60 @@
 
-<div class="header-2">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top navbar-transparent " color-on-scroll="100">
     <div class="container">
-        <div class="header_content d-flex flex-row  justify-content-between col-11 pl-6">
-            <div class="main-menubar d-flex align-items-center">
-                <nav class="hide">
-                    <!-- <a href="#home"><?= __('template', 'Airplane'); ?></a> -->
-                    <!-- <a href="#service"><?= __('template', 'Train'); ?></a> -->
-                    <a href="<?= tools()->getUrl('', ['tab' => 'box-bus']) ?>"><?= __('template', 'Bus'); ?></a>
-                    <!-- <a href="#consultant"><?= __('template', 'Hotel'); ?></a> -->
-                    <!-- <a href=""><?= __('template', 'Tour'); ?></a> -->
-                    <!-- <a href=""><?= __('template', 'Event'); ?></a> -->
-                    <a href="<?= tools()->getUrl('', ['tab' => 'box-insurance']) ?>"><?= __('template', 'Insurance'); ?></a>
-                    <!-- <a href=""><?= __('template', 'Car Rent'); ?></a> -->
-                </nav>
-                <div class="menu-bar"><span class="fa fa-bars color"></span></div>
+      <div class="navbar-translate">
+        <a class="navbar-brand" href="<?= tools()->getUrl() ?>" rel="tooltip" title="" data-placement="bottom">
+          <span>Omid</span> Codnitive
+        </a>
+        <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-bar bar1"></span>
+          <span class="navbar-toggler-bar bar2"></span>
+          <span class="navbar-toggler-bar bar3"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse justify-content-end" id="navigation">
+        <div class="navbar-collapse-header">
+          <div class="row">
+            <div class="col-6 collapse-brand">
+              <a>
+                Omid
+              </a>
             </div>
-            <?php if (tools()->showProcessCheckout()): ?>
-            <div class="d-flex align-items-center">
-                <a class="color-white hover-color-white" href="<?= tools()->getUrl('checkout/cart') ?>">
-                    <?= __('template', 'Process Checkout'); ?>
-                    <i class="fa fa-shopping-cart color mr-2"></i>
-                </a>
+            <div class="col-6 collapse-close text-right">
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="tim-icons icon-simple-remove"></i>
+              </button>
             </div>
-            <?php endif ?>
+          </div>
         </div>
-
+        <ul class="navbar-nav">
+          <li class="nav-item p-0">
+            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://github.omidb.me/" target="_blank">
+              <i class="fab fa-linkedin"></i>
+              <p class="d-lg-none d-xl-none">Linkedin</p>
+            </a>
+          </li>
+          <li class="nav-item p-0">
+            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://linkedin.omidb.me/" target="_blank">
+              <i class="fab fa-github-square"></i>
+              <p class="d-lg-none d-xl-none">Github</p>
+            </a>
+          </li>
+          <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+              <i class="fa fa-cogs d-lg-none d-xl-none"></i> Getting Started
+            </a>
+            <div class="dropdown-menu dropdown-with-icons">
+              <a href="<?= tools()->getUrl('poker/game/start') ?>" class="dropdown-item">
+                <i class="tim-icons icon-paper"></i> Poker Change
+              </a>
+              <a href="<?= tools()->getUrl('graph/analyze/form'); ?>" class="dropdown-item">
+                <i class="tim-icons icon-bullet-list-67"></i>String Graph
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
-    <!-- End Header Area -->
-    <?= $this->render('_logo.phtml'); ?>
-</div>
+  </nav>
+  <!-- End Navbar -->

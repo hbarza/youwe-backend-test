@@ -17,7 +17,6 @@ $config['components']['urlManager'] = [
             [
                 'pattern' => '<lang:\w{2}>',
                 'route' => '',
-                'defaults' => ['lang' => 'def'],
             ],
         ],
         $generalRoutes
