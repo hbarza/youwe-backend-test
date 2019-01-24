@@ -11,7 +11,7 @@ class StartAction extends Action
     {
         return $this->controller->render(
             '/templates/game/start.phtml', 
-            ['deck' => (new Deck)->getCardsDeck()]
+            ['deck' => (new Deck)->getCardsDeck(false, true)]
         );
     }
 }
