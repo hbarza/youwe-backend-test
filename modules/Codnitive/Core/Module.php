@@ -38,6 +38,7 @@ class Module extends \yii\base\Module
     {
         require_once 'App.php';
         require_once 'Tools.php';
+        require_once 'Dump.php';
         require_once 'ObjectManager.php';
         // \Yii::$classMap['yii\helpers\Url'] = '@app/modules/Codnitive/Core/helpers/Url.php';
         app()->on('beforeAction', function ($event) {

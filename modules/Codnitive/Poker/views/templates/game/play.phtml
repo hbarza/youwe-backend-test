@@ -1,0 +1,23 @@
+<?php 
+$block = new \app\modules\Codnitive\Template\blocks\Main;
+$block->registerAssets($this, 'Poker', 'Poker');
+?>
+
+<div class="section section-nucleo-icons">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-12">
+                <h2 class="title"><?= __('poker', 'OK, Let Play with Your Chance!') ?></h2>
+                <h5 class="title"><?= __('poker', 'Find your chance by click on cards.') ?></h5>
+            </div>
+        </div>
+        <div class="deck icons">
+            <?php foreach ($deck as $key => $card): ?>
+            <i data-key="<?= $key ?>" class="mx-2 my-4 d-inline-block icon icon-xl tim-icons display-1 text-center text-white card back">
+                <?= tools()->getOptionValue('Poker', 'DeckIcons', 'BK') ?>
+            </i>
+            <?php endforeach ?>
+        </div>
+    </div>
+</div>
+<?= $this->render('play/_js.phtml') ?>

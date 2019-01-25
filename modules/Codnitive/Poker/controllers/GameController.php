@@ -9,9 +9,13 @@ use yii\filters\AccessControl;
 class GameController extends PageController
 {
     protected $_actions = [
-        'start' => ['get'],
+        'start'  => ['get'],
+        'choice' => ['get'],
+        'play'   => ['get'],
+        'select'   => ['get'],
     ];
 
+    /** @inheritdoc */
     public function init()
     {
         parent::init();
@@ -42,6 +46,7 @@ class GameController extends PageController
         ];
     }
 
+    /** @inheritdoc */
     public function actions()
     {
         $actions = [];

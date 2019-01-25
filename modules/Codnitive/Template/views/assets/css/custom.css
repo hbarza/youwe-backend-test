@@ -1,0 +1,17 @@
+.icon.card {
+    font-weight: 300;
+}
+.icon-xl {
+    width: 4rem;
+}
+.card {
+    color: #333;
+    background: #fcfcfc;
+}
+.card.red {
+    color: red;
+}
+.card.back {
+    color: #344675!important;
+    cursor: pointer;
+}

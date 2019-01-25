@@ -35,7 +35,7 @@ class Deck
      * 
      * @return array
      */
-    public function getValues(): array
+    public function getRanks(): array
     {
         return $this->_rank;
     }
@@ -48,7 +48,7 @@ class Deck
     public function generateDeck(bool $flat = false): self
     {
         foreach ($this->getSuits() as $suit) {
-            $this->_deck[$suit] = preg_filter('/^/', $suit, $this->getValues());
+            $this->_deck[$suit] = preg_filter('/^/', $suit, $this->getRanks());
         }
         if ($flat) {
             $this->_deck = call_user_func_array('array_merge', $this->_deck);
@@ -63,7 +63,7 @@ class Deck
      */
     public function shuffleDeck(): self
     {
-        if (is_array(array_shift($this->_deck))) {
+        if (is_array(reset($this->_deck))) {
             $this->_deck = call_user_func_array('array_merge', $this->_deck);
         }
         shuffle($this->_deck);
@@ -75,7 +75,7 @@ class Deck
      * 
      * @param $shuffle  bool
      */
-    public function getCardsDeck(bool $shuffle = true, bool $flat = true): array
+    public function getCardsDeck(bool $shuffle = false, bool $flat = true): array
     {
         if (empty($this->_deck)) {
             $this->generateDeck($flat);

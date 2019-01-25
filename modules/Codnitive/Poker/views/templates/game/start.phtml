@@ -7,12 +7,14 @@ $deckIcons = $block->getDeckIcons();
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-12">
-                <h2 class="title"><?= __('template', 'Select Your Card') ?></h2>
+                <h2 class="title"><?= __('poker', 'Select Your Card') ?></h2>
             </div>
         </div>
         <div class="deck icons">
             <?php foreach ($deck as $card): ?>
-            <a href="<?= tools()->getUrl('poker/game/play', ['card' => $card]) ?>" class="mx-0 my-4 d-inline-block"><i class="icon icon-xl tim-icons display-1 text-center text-white"><?= $deckIcons[$card] ?></i></a>
+            <a href="<?= tools()->getUrl('poker/game/choice', ['card' => $card]) ?>" class="m-2 d-inline-block">
+                <i class="icon icon-xl tim-icons display-1 text-center card <?php if (preg_match('/^(H|D)/', $card)) echo 'red' ?>"><?= $deckIcons[$card] ?></i>
+            </a>
             <?php endforeach ?>
         </div>
     </div>
