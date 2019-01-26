@@ -18,51 +18,45 @@ $backSide  = tools()->getOptionValue('Poker', 'DeckIcons', 'BK');
 $currentScore = $block->getCurrentScore();
 ?>
 
-<div class="section-signup mt-0">
-    <div class="container">
-        <div class="squares square-1"></div>
-        <div class="squares square-2"></div>
-        <div class="squares square-3"></div>
-        <div class="squares square-4"></div>
-        <div class="section section-nucleo-icons pt-0">
-            <div class="poker-chance play">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8 col-md-12 my-4">
-                        <h1 class="title"><?= __('poker', 'OK, Lets Play with Your Chance!') ?></h1>
-                        <h4 class="title"><?= __('poker', 'Find your chance by click on cards.') ?></h4>
-                    </div>
+<div class="container">
+    <div class="section section-nucleo-icons pt-0">
+        <div class="poker-chance play">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-12 my-4">
+                    <h1 class="title"><?= __('poker', 'OK, Lets Play with Your Chance!') ?></h1>
+                    <h4 class="title"><?= __('poker', 'Find your chance by click on cards.') ?></h4>
                 </div>
-                <div class="statistics row my-5">
-                    <div class="progress-container progress-primary col-6 px-5">
-                        <span class="progress-badge"><?= __('poker', 'Chance') ?></span>
-                        <span class="progress-value text-white mx-3">(<?= $block->getCurrentChance() ?>%)</span>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-warning" role="progressbar" 
-                                aria-valuenow="<?= $block->getCurrentChance() ?>" 
-                                aria-valuemin="0" 
-                                aria-valuemax="100" 
-                                style="width: <?= $block->getCurrentChance() ?>%;">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="score-container score-primary col-6 px-5">
-                        <span class="score-badge"><?= __('poker', 'Score') ?></span>
-                        <div class="score">
-                            <?php for ($i = $block->getScoreMaxStars(); $i > 0; $i--): ?>
-                            <?php $starNumber = $block->getStarNumber($i) ?>
-                            <i class="fas fa-star p-1 star-<?= $starNumber ?> <?php if ($starNumber <= $currentScore) echo 'text-primary' ?>"></i>
-                            <?php endfor ?>
+            </div>
+            <div class="statistics row my-2">
+                <div class="progress-container progress-primary col-6 px-5">
+                    <span class="progress-badge"><?= __('poker', 'Chance') ?></span>
+                    <span class="progress-value text-white mx-3">(<?= $block->getCurrentChance() ?>%)</span>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-warning" role="progressbar" 
+                            aria-valuenow="<?= $block->getCurrentChance() ?>" 
+                            aria-valuemin="0" 
+                            aria-valuemax="100" 
+                            style="width: <?= $block->getCurrentChance() ?>%;">
                         </div>
                     </div>
                 </div>
-                <div class="deck icons">
-                    <?php foreach ($deck as $key => $card): ?>
-                    <i data-key="<?= $key ?>" class="<?php echo $block->selectedCard($key) ? 'disabled' : 'back' ?> card mx-2 my-4 d-inline-block icon icon-xl tim-icons display-1 text-center text-white">
-                        <?php /*<?= tools()->getOptionValue('Poker', 'DeckIcons', 'BK') ?>*/ ?>
-                        <?= $block->selectedCard($key) ? $deckIcons[$card] : $backSide ?>
-                    </i>
-                    <?php endforeach ?>
+                <div class="score-container score-primary col-6 px-5">
+                    <span class="score-badge"><?= __('poker', 'Score') ?></span>
+                    <div class="score">
+                        <?php for ($i = $block->getScoreMaxStars(); $i > 0; $i--): ?>
+                        <?php $starNumber = $block->getStarNumber($i) ?>
+                        <i class="fas fa-star p-1 star-<?= $starNumber ?> <?php if ($starNumber <= $currentScore) echo 'text-primary' ?>"></i>
+                        <?php endfor ?>
+                    </div>
                 </div>
+            </div>
+            <div class="deck icons">
+                <?php foreach ($deck as $key => $card): ?>
+                <i data-key="<?= $key ?>" class="<?php echo $block->selectedCard($key) ? 'disabled' : 'back' ?> card mx-2 my-4 d-inline-block icon icon-xl tim-icons display-1 text-center text-white">
+                    <?php /*<?= tools()->getOptionValue('Poker', 'DeckIcons', 'BK') ?>*/ ?>
+                    <?= $block->selectedCard($key) ? $deckIcons[$card] : $backSide ?>
+                </i>
+                <?php endforeach ?>
             </div>
         </div>
     </div>
