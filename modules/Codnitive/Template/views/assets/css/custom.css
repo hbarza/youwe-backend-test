@@ -36,6 +36,13 @@
     background-image:      -o-linear-gradient(to bottom left, #fd5d93, #ec250d, #fd5d93);
     background-image:         linear-gradient(to bottom left, #fd5d93, #ec250d, #fd5d93);
 }
+.card-register .card-header {
+  background-color: transparent;
+}
+.card-register .card-header img {
+  width: 100%;
+  margin-top: -350px;
+}
 
 
 /* Home Scroll Down ===== */
