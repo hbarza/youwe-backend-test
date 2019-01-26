@@ -22,25 +22,45 @@ class CheckPlayAction extends Action
      */
     public function run()
     {
-        $selectedCard = app()->getRequest()->get('key', '');
-        if (!$selectedCard) {
+        $selectedCard = intval(app()->getRequest()->get('key', -1));
+        if (-1 === $selectedCard) {
             return Json::encode(['status' => false, 'message' => __('poker', 'Please select a card')]);
         }
+        $pokerGame = $this->_updatePokerGame($selectedCard);
         $play = new Play(
-            app()->session->get('poker_game')['chosen_card'],
+            $pokerGame['chosen_card'],
             $selectedCard,
-            app()->session->get('poker_game')['deck'],
+            $pokerGame['deck'],
+            $pokerGame['remaining_deck']
         );
-
-        dump($play->doesWon());
-        exit;
-
-        $response = [
-            'element' => '.ajax-result-wrapper',
-            'type'    => 'html',
-            'content' => '$message'
-        ];
-
+        
+        if ($play->doesWin()) {
+            $play->setWinner();
+            $response = [
+                'status' => true,
+                'message' => __('poker', 'Got it, the chance was {chance}%', ['chance' => $play->calcChance()]),
+                'chance' => $play->calcChance(),
+                'score' => $play->calcScore(),
+                'selected_card' => tools()->getOptionValue('Poker', 'DeckIcons', $play->getSelectedCard()),
+            ];
+        }
+        else {
+            $response = [
+                'status' => false,
+                'message' => '',
+                'chance' => $play->calcChance(),
+                'score' => $play->calcScore(),
+                'selected_card' => tools()->getOptionValue('Poker', 'DeckIcons', $play->getSelectedCard())
+            ];
+        }
         return Json::encode($response);
+    }
+
+    private function _updatePokerGame(int $selectedCard): array
+    {
+        $pokerGame = app()->session->get('poker_game');
+        unset($pokerGame['remaining_deck'][$selectedCard]);
+        app()->session->set('poker_game', $pokerGame);
+        return $pokerGame;
     }
 }

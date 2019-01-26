@@ -3,6 +3,7 @@ namespace app\modules\Codnitive\Poker\models;
 
 class Play
 {
+    const SCORE_STARS = 5;
     /**
      * Stores player's chosen card name at fist of play
      */
@@ -15,17 +16,23 @@ class Play
     protected $_selectedCardKey;
 
     /**
+     * Stores game full deck
+     */
+    protected $_deck;
+
+    /**
      * Stores current move avaialbel deck (on each move selected card removes on controllre)
      * will use to ckeck player wins or nat and calculate player's chance
      * 
      */
     protected $_remainingDeck;
 
-    public function __construnct(string $cardName = '', int $key = 0, array $deck = [])
+    public function __construct(string $chosenCardName = '', int $selectedCardKey = 0, array $deck = [], array $remainingDeck = [])
     {
-        $this->setChosenCard($cardName)
-            ->setMoveCardKey($key)
-            ->setRemainingDeck($deck);
+        $this->setChosenCard($chosenCardName)
+            ->setSelectedCardKey($selectedCardKey)
+            ->setDeck($deck)
+            ->setRemainingDeck($remainingDeck);
     }
     
     /**
@@ -67,7 +74,21 @@ class Play
      */
     public function getSelectedCard(): string
     {
-        return $this->getRemainingDeck()[$this->getSelectedCardKey()] ?? '';
+        return $this->getDeck()[$this->getSelectedCardKey()] ?? '';
+    }
+
+    /**
+     * Setter for store game original deck
+     */
+    public function setDeck(array $deck): self
+    {
+        $this->_deck = $deck;
+        return $this;
+    }
+
+    public function getDeck(): array
+    {
+        return $this->_deck;
     }
 
     /**
@@ -84,18 +105,46 @@ class Play
      */
     public function getRemainingDeck(): array
     {
-        return (array) $this->_chosenCard;
+        return (array) $this->_remainingDeck;
     }
 
     /**
      * Checks current move with chosen card to find player wins game or not
      */
-    public function doesWon(): bool
+    public function doesWin(): bool
     {
-        dump($this->getChosenCard());
-        dump($this->getSelectedCard());
-        exit;
+        // return true;
         return $this->getChosenCard() === $this->getSelectedCard();
+    }
+
+    public function setWinner(): self
+    {
+        $pokerGame      = app()->session->get('poker_game');
+        $remainingDeck  = $this->getRemainingDeck();
+        $remainingDeck['winner'] = $pokerGame['winner'] = $this->getSelectedCard();
+        $this->setRemainingDeck($remainingDeck);
+        app()->session->set('poker_game', $pokerGame);
+        return $this;
+    }
+
+    /**
+     * Claculates player chance on current move
+     * 
+     */
+    public function calcChance(): float
+    {
+        $deckCount = count($this->getDeck());
+        $remainingDeckCount = count($this->getRemainingDeck()) - 1;
+
+        return round(($deckCount - $remainingDeckCount) * 100 / $deckCount, 2);
+    }
+
+    /**
+     * Calculates player score stars
+     */
+    public function calcScore(): int
+    {
+        return ceil((100 - $this->calcChance()) /  (100 / self::SCORE_STARS));
     }
 }
 

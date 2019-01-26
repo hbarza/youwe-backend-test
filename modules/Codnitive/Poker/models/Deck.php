@@ -11,7 +11,7 @@ class Deck
     /**
      * Card values list
      */
-    protected $_rank = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+    protected $_ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 
     /**
      * Stores generated deck (if you shuffle deck, still it will store in this var)
@@ -37,7 +37,7 @@ class Deck
      */
     public function getRanks(): array
     {
-        return $this->_rank;
+        return $this->_ranks;
     }
 
     /**

@@ -17,8 +17,14 @@ class PlayAction extends Action
             return $this->controller->redirect(tools()->getUrl('poker/game/start'));
         }
         
+        $pokerGame = app()->session->get('poker_game');
+        if (isset($pokerGame['winner'])) {
+            $this->setFlash('success', __('poker', 'You finished the game, please start again.'));
+            return $this->controller->redirect(tools()->getUrl('poker/game/start'));
+        }
+
         return $this->controller->render('/templates/game/play.phtml', 
-            ['deck' => app()->session->get('poker_game')['deck']]
+            ['deck' => $pokerGame['deck']]
         );
     }
 }

@@ -19,9 +19,11 @@ class ChoiceAction extends Action
             return $this->controller->redirect(tools()->getUrl('poker/game/start'));
         }
         
+        $deck = (new Deck)->getCardsDeck(true);
         app()->session->set('poker_game', [
             'chosen_card' => $chosenCard,
-            'deck' => (new Deck)->getCardsDeck(true)
+            'deck' => $deck,
+            'remaining_deck' => $deck
         ]);
         return $this->controller->redirect(tools()->getUrl('poker/game/play'));
     }
