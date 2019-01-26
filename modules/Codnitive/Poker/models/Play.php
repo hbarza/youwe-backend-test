@@ -1,4 +1,9 @@
 <?php 
+/**
+ * Game play model
+ *
+ * @author Omid Barza <hbarza@gmail.com>
+ */
 namespace app\modules\Codnitive\Poker\models;
 
 class Play
@@ -6,17 +11,23 @@ class Play
     const SCORE_STARS = 5;
     /**
      * Stores player's chosen card name at fist of play
+     * 
+     * @var string
      */
     protected $_chosenCard;
 
     /**
      * Stores player's current move selected card
      * will use to ckeck player wins or nat and calculate player's chance
+     * 
+     * @var int
      */
     protected $_selectedCardKey;
 
     /**
      * Stores game full deck
+     * 
+     * @var array
      */
     protected $_deck;
 
@@ -24,6 +35,7 @@ class Play
      * Stores current move avaialbel deck (on each move selected card removes on controllre)
      * will use to ckeck player wins or nat and calculate player's chance
      * 
+     * @var array
      */
     protected $_remainingDeck;
 
@@ -37,6 +49,9 @@ class Play
     
     /**
      * Setter to save players chosen card
+     * 
+     * @param string $cardName
+     * @return app\modules\Codnitive\Poker\models\Play
      */
     public function setChosenCard(string $cardName): self
     {
@@ -46,6 +61,8 @@ class Play
 
     /**
      * Getter to retrive player's chosen card
+     * 
+     * @return string
      */
     public function getChosenCard(): string
     {
@@ -54,6 +71,9 @@ class Play
 
     /**
      * Setter function to set player's current move selected card id
+     * 
+     * @param int $key card key in deck array
+     * @return app\modules\Codnitive\Poker\models\Play
      */
     public function setSelectedCardKey(int $key): self
     {
@@ -63,6 +83,8 @@ class Play
 
     /**
      * Getter to retrive player's selected card in this move
+     * 
+     * @return int
      */
     public function getSelectedCardKey(): int
     {
@@ -71,6 +93,8 @@ class Play
 
     /**
      * Returns name of current selected card
+     * 
+     * @return string
      */
     public function getSelectedCard(): string
     {
@@ -79,6 +103,9 @@ class Play
 
     /**
      * Setter for store game original deck
+     * 
+     * @param array $deck
+     * @return app\modules\Codnitive\Poker\models\Play
      */
     public function setDeck(array $deck): self
     {
@@ -86,6 +113,11 @@ class Play
         return $this;
     }
 
+    /**
+     * Getter to get game deck
+     * 
+     * @return array
+     */
     public function getDeck(): array
     {
         return $this->_deck;
@@ -93,6 +125,9 @@ class Play
 
     /**
      * Setter for define remaining cards of deck 
+     * 
+     * @param array $deck
+     * @return app\modules\Codnitive\Poker\models\Play
      */
     public function setRemainingDeck(array $deck): self
     {
@@ -102,6 +137,8 @@ class Play
 
     /**
      * Getter to retrive remaining cards deck
+     * 
+     * @return array
      */
     public function getRemainingDeck(): array
     {
@@ -110,13 +147,19 @@ class Play
 
     /**
      * Checks current move with chosen card to find player wins game or not
+     * 
+     * @return bool
      */
     public function doesWin(): bool
     {
-        // return true;
         return $this->getChosenCard() === $this->getSelectedCard();
     }
 
+    /**
+     * Set and update session parameter when player wins the game
+     * 
+     * @return app\modules\Codnitive\Poker\models\Play
+     */
     public function setWinner(): self
     {
         $pokerGame      = app()->session->get('poker_game');
@@ -130,6 +173,7 @@ class Play
     /**
      * Claculates player chance on current move
      * 
+     * @return float
      */
     public function calcChance(): float
     {
@@ -141,6 +185,8 @@ class Play
 
     /**
      * Calculates player score stars
+     * 
+     * @return int
      */
     public function calcScore(): int
     {

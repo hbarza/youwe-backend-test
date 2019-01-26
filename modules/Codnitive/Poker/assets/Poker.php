@@ -1,15 +1,13 @@
 <?php
-
+/**
+ * Poker module asset bundle
+ *
+ * @author Omid Barza <hbarza@gmail.com>
+ */
 namespace app\modules\Codnitive\Poker\assets;
 
 use yii\web\AssetBundle;
 
-/**
- * Main application asset bundle.
- *
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @since 2.0
- */
 class Poker extends AssetBundle
 {
     public $baseUrl = '@web';

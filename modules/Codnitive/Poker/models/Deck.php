@@ -1,15 +1,24 @@
 <?php 
+/**
+ * Deck generator model
+ *
+ * @author Omid Barza <hbarza@gmail.com>
+ */
 namespace app\modules\Codnitive\Poker\models;
 
 class Deck
 {
     /**
      * Card suits list
+     * 
+     * @var array
      */
     protected $_suits  = ['H', 'S', 'D', 'C'];
 
     /**
      * Card values list
+     * 
+     * @var array
      */
     protected $_ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 
@@ -43,6 +52,7 @@ class Deck
     /**
      * Generates sorted cards deck
      * 
+     * @param bool $flat generate deck in two dimensional array
      * @return app\modules\Codnitive\Poker\models\Deck
      */
     public function generateDeck(bool $flat = false): self
@@ -73,7 +83,9 @@ class Deck
     /**
      * Retrives cards deck, it will generate deck if needed
      * 
-     * @param $shuffle  bool
+     * @param $shuffle  bool generate shuffled deck
+     * @param bool $flat generate deck in two dimensional array
+     * @return array
      */
     public function getCardsDeck(bool $shuffle = false, bool $flat = true): array
     {

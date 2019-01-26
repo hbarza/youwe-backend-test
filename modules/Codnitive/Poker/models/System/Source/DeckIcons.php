@@ -1,9 +1,18 @@
 <?php
-
+/**
+ * Deck icons source array
+ *
+ * @author Omid Barza <hbarza@gmail.com>
+ */
 namespace app\modules\Codnitive\Poker\models\System\Source;
 
 class DeckIcons extends \app\modules\Codnitive\Core\models\System\Source\OptionsArray
 {
+    /**
+     * List of deck icons
+     * 
+     * @return array
+     */
     public function optionsArray()
     {
         return [

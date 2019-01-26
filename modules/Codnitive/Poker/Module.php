@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Module declaration class
+ *
+ * @author Omid Barza <hbarza@gmail.com>
+ */
 namespace app\modules\Codnitive\Poker;
 
 /**

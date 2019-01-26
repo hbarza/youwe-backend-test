@@ -1,4 +1,16 @@
 <?php 
+/**
+ * Playing game page
+ *
+ * @author Omid Barza <hbarza@gmail.com>
+ */
+
+/**
+ * @block app\modules\Codnitive\Poker\blocks\Game\Play
+ */
+?>
+
+<?php 
 $block = new \app\modules\Codnitive\Poker\blocks\Game\Play;
 $block->registerAssets($this, 'Poker', 'Poker');
 $deckIcons = $block->getDeckIcons();

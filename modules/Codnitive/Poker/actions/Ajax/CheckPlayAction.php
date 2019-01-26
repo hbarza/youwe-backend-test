@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Playing game ajax action
+ *
+ * @author Omid Barza <hbarza@gmail.com>
+ */
 namespace app\modules\Codnitive\Poker\actions\Ajax;
 
 use yii\helpers\Json;
@@ -19,6 +23,8 @@ class CheckPlayAction extends Action
 
     /**
      * cleans session and renders ordered cards deck
+     * 
+     * @return string (json)
      */
     public function run()
     {
@@ -56,6 +62,11 @@ class CheckPlayAction extends Action
         return Json::encode($response);
     }
 
+    /**
+     * Updates game session
+     * 
+     * @return array
+     */
     private function _updatePokerGame(int $selectedCard): array
     {
         $pokerGame = app()->session->get('poker_game');

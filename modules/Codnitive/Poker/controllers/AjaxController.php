@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Game ajax routes controller
+ *
+ * @author Omid Barza <hbarza@gmail.com>
+ */
 namespace app\modules\Codnitive\Poker\controllers;
 
 use app\modules\Codnitive\Template\controllers\PageController;
@@ -8,6 +12,9 @@ use yii\filters\AccessControl;
 
 class AjaxController extends PageController
 {
+    /**
+     * List of available actions for this controller
+     */
     protected $_actions = [
         'checkPlay'  => ['get'],
     ];

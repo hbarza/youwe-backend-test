@@ -1,3 +1,9 @@
+/**
+ * poker chance game js actions
+ *
+ * @author Omid Barza <hbarza@gmail.com>
+ */
+
 codnitive.poker = function() 
 {
     this._init = function()
