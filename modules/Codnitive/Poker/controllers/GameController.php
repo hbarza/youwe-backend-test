@@ -26,7 +26,7 @@ class GameController extends PageController
     public function init()
     {
         parent::init();
-        $this->setBodyClass('poker index');
+        $this->setBodyClass('poker index index-page');
         $this->setBodyId('poker_chance');
     }
 

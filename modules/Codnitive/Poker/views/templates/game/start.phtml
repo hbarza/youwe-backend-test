@@ -15,19 +15,31 @@ $block = new \app\modules\Codnitive\Poker\blocks\Game\Start;
 $deckIcons = $block->getDeckIcons();
 ?>
 
-<div class="section section-nucleo-icons">
-    <div class="container poker-chance start">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-12 my-4">
-                <h1 class="title"><?= __('poker', 'Select Your Card') ?></h1>
+<div class="section-signup mt-0">
+    <div class="container">
+        <div class="squares square-1"></div>
+        <div class="squares square-2"></div>
+        <div class="squares square-3"></div>
+        <div class="squares square-4"></div>
+        <div class="section section-nucleo-icons pt-0">
+            <div class="poker-chance start">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-md-12 my-4">
+                        <h1 class="title"><?= __('poker', 'Select Your Card') ?></h1>
+                    </div>
+                </div>
+                <div class="deck icons">
+                    <?php foreach ($deck as $card): ?>
+                    <a href="<?= tools()->getUrl('poker/game/choice', ['card' => $card]) ?>" class="m-2 d-inline-block">
+                        <i class="icon icon-xl tim-icons display-1 text-center card <?php if (preg_match('/^(H|D)/', $card)) echo 'red' ?>"><?= $deckIcons[$card] ?></i>
+                    </a>
+                    <?php endforeach ?>
+                </div>
             </div>
-        </div>
-        <div class="deck icons">
-            <?php foreach ($deck as $card): ?>
-            <a href="<?= tools()->getUrl('poker/game/choice', ['card' => $card]) ?>" class="m-2 d-inline-block">
-                <i class="icon icon-xl tim-icons display-1 text-center card <?php if (preg_match('/^(H|D)/', $card)) echo 'red' ?>"><?= $deckIcons[$card] ?></i>
-            </a>
-            <?php endforeach ?>
         </div>
     </div>
 </div>
+
+
+
+
