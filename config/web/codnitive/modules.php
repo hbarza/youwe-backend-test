@@ -13,4 +13,7 @@ $config['modules'] = [
     'poker' => [
         'class' => 'app\modules\Codnitive\Poker\Module',
     ],
+    'graph' => [
+        'class' => 'app\modules\Codnitive\Graph\Module',
+    ],
 ];

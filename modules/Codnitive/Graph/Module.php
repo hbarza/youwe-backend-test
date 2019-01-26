@@ -4,16 +4,16 @@
  *
  * @author Omid Barza <hbarza@gmail.com>
  */
-namespace app\modules\Codnitive\Poker;
+namespace app\modules\Codnitive\Graph;
 
 /**
- * Poker module for poker change game test
+ * Graph module for string analyzer test
  */
 class Module extends \app\modules\Codnitive\Core\Module
 {
-    public const MODULE_NAME = 'Poker';
+    public const MODULE_NAME = 'Graph';
 
-    public const MODULE_ID = 'poker';
+    public const MODULE_ID = 'graph';
     /**
      * Module unique id
      */
