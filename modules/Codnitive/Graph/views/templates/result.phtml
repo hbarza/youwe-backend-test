@@ -1,0 +1,52 @@
+<?php 
+/**
+ * Playing game page
+ *
+ * @author Omid Barza <hbarza@gmail.com>
+ */
+?>
+
+<div class="container">
+    <div class="section section-nucleo-icons pt-5 mt-5">
+        <div class="string-analyzer">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-12 my-4">
+                    <h1 class="title"><?= __('graph', 'Your phrase statistics and graph') ?></h1>
+                </div>
+            </div>
+            
+            <div class="statistics-graph my-3 text-white text-center py-4">
+                <h3><?= $string ?></h3>
+                <div class="progress-container progress-primary row col-12 px-5">
+                    <div class="col-6 statistics">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="p-3"><?= __('graph', 'Character') ?></th>
+                                    <th class="p-3"><?= __('graph', 'Count') ?></th>
+                                    <th class="p-3"><?= __('graph', 'Before') ?></th>
+                                    <th class="p-3"><?= __('graph', 'After') ?></th>
+                                    <th class="p-3"><?= __('graph', 'Max Distance') ?></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($statistics as $character => $info): ?>
+                                <tr>
+                                    <td class="p-3"><?= $character ?></td>
+                                    <td class="p-3"><?= $info['count'] ?></td>
+                                    <td class="p-3"><?= $info['before'] ?></td>
+                                    <td class="p-3"><?= $info['after'] ?></td>
+                                    <td class="p-3"><?= $info['max_distance'] ?></td>
+                                </tr>
+                                <?php endforeach ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-6 graph">
+                        Graph Placeholder
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

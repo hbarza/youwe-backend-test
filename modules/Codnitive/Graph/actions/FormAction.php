@@ -3,6 +3,7 @@
 namespace app\modules\Codnitive\Graph\actions;
 
 use app\modules\Codnitive\Core\actions\Action;
+use app\modules\Codnitive\Graph\models\Form;
 
 class FormAction extends Action
 {
@@ -11,11 +12,6 @@ class FormAction extends Action
      */
     public function run()
     {
-        dump('hello');
-        exit;
-        return $this->controller->render(
-            '/templates/game/start.phtml', 
-            ['deck' => (new Deck)->getCardsDeck()]
-        );
+        return $this->controller->render('/templates/form.phtml', ['model' => new Form]);
     }
 }

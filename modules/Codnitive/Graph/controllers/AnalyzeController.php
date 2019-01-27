@@ -17,7 +17,7 @@ class AnalyzeController extends PageController
      */
     protected $_actions = [
         'form'  => ['get'],
-        'result'  => ['get'],
+        'result'  => ['post'],
     ];
 
     /** @inheritdoc */

@@ -1,0 +1,57 @@
+<?php 
+/**
+ * Playing game page
+ *
+ * @author Omid Barza <hbarza@gmail.com>
+ */
+
+/**
+ * @block app\modules\Codnitive\Graph\blocks\Form
+ */
+?>
+
+<?php 
+    $block = new \app\modules\Codnitive\Graph\blocks\Form;
+    $block->html()->setNameSpace('string_analyzer');
+?>
+
+<div class="container">
+    <div class="section section-nucleo-icons pt-5 mt-5">
+        <div class="string-analyzer form">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-12 my-4">
+                    <h1 class="title"><?= __('graph', 'Please enter your phrase to analyze') ?></h1>
+                </div>
+            </div>
+            
+            <div class="statistics my-3">
+                <?php $form = $block->beginForm([
+                    'action' => tools()->getUrl('graph/analyze/result'),
+                    'options' => [
+                        'method' => 'post',
+                        'id' => 'string_analyzer_form'
+                    ]
+                ]); ?>
+                <div class="progress-container progress-primary row col-12 px-5">
+                    <div class="col-6">
+                        <?= $block->html()->getField($form, $model, 'string', '', '', [
+                            'form_group_class' => 'col-sm-12 col-md-12 my-3', 
+                            'class' => 'string',
+                            'remove_label' => true
+                        ]); ?>
+                    </div>
+                    <div class="col-6">
+                        <?= $block->html()->submitButton(
+                            __('graph', 'Analyze String'), 
+                            [
+                                'class' => 'btn btn-primary my-3',
+                                'id' => 'string_analyzer_form_submit',
+                            ]
+                        ) ?>
+                    </div>
+                </div>
+                <?php $block->endForm(); ?>
+            </div>
+        </div>
+    </div>
+</div>

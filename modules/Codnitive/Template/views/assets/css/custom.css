@@ -46,6 +46,20 @@
 .section-signup {
   padding-top: 0;
 }
+#string_analyzer_form {
+  color: #fff;
+}
+#string_analyzer_form input {
+  border-color: #e14eca;
+}
+.string-analyzer .statistics th,
+.string-analyzer .statistics td {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+}
+.string-analyzer .statistics-graph {
+  background: #1f2251;
+}
 
 
 /* Home Scroll Down ===== */
