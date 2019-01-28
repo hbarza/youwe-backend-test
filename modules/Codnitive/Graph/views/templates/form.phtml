@@ -33,14 +33,14 @@
                     ]
                 ]); ?>
                 <div class="progress-container progress-primary row col-12 px-5">
-                    <div class="col-6">
+                    <div class="col-6 offset-2">
                         <?= $block->html()->getField($form, $model, 'string', '', '', [
                             'form_group_class' => 'col-sm-12 col-md-12 my-3', 
                             'class' => 'string',
                             'remove_label' => true
                         ]); ?>
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
                         <?= $block->html()->submitButton(
                             __('graph', 'Analyze String'), 
                             [

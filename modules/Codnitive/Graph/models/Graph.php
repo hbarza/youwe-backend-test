@@ -63,10 +63,15 @@ class Graph
     /**
      * Returns traversed string statistics
      * 
+     * @param bool $formatted 
      * @return array
      */
-    public function getStatistics(): array
+    public function getStatistics(bool $formatted = true): array
     {
+        if (!$formatted) {
+            return $this->_statistics;
+        }
+        
         $statistics = [];
         foreach ($this->_statistics as $nodeValue => $node) {
             $statistics[$nodeValue] = [

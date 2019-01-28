@@ -4,6 +4,14 @@
  *
  * @author Omid Barza <hbarza@gmail.com>
  */
+
+/**
+ * @block app\modules\Codnitive\Graph\blocks\Form
+ */
+?>
+
+<?php 
+    $block = new \app\modules\Codnitive\Graph\blocks\Form;
 ?>
 
 <div class="container">
@@ -15,8 +23,9 @@
                 </div>
             </div>
             
+            <a href="<?= tools()->getUrl('graph/analyze/form') ?>"><?= __('graph', 'Change Phrase') ?></a>
             <div class="statistics-graph my-3 text-white text-center py-4">
-                <h3><?= $string ?></h3>
+                <h3>"<?= $string ?>"</h3>
                 <div class="progress-container progress-primary row col-12 px-5">
                     <div class="col-6 statistics">
                         <table>
@@ -43,7 +52,7 @@
                         </table>
                     </div>
                     <div class="col-6 graph">
-                        Graph Placeholder
+                        <?= $graph ?>
                     </div>
                 </div>
             </div>

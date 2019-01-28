@@ -5,6 +5,7 @@ namespace app\modules\Codnitive\Graph\actions;
 use app\modules\Codnitive\Core\actions\Action;
 use app\modules\Codnitive\Graph\models\Form;
 use app\modules\Codnitive\Graph\models\Graph;
+use app\modules\Codnitive\Graph\blocks\Result;
 
 class ResultAction extends Action
 {
@@ -22,9 +23,12 @@ class ResultAction extends Action
         
         $string = app()->getRequest()->post('string_analyzer')['string'];
         $graph  = (new Graph(strtolower($string)))->analyze();
+        $graph->traverse();
+
         return $this->controller->render('/templates/result.phtml', [
-            'string' => $string,
-            'statistics' => $graph->traverse()->getStatistics()
+            'string'     => $string,
+            'statistics' => $graph->getStatistics(),
+            'graph'      => (new Result)->drawGraph($graph->getStatistics(false))
         ]);
     }
 }
