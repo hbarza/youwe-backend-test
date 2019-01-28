@@ -93,7 +93,8 @@ class Html extends BaseHtml
         return $form->field($model, $field, [
                 'options' => ['class' => $formGroupclass],
                 'template' => $template,
-                'labelOptions' => $labelOptions
+                'labelOptions' => $labelOptions,
+                'inputOptions' => $data['inputOptions']
             ])/*->textInput(['class' => $class, 'placeHolder' => $placeHolder])*/;
     }
 

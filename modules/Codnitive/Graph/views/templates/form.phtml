@@ -37,7 +37,11 @@
                         <?= $block->html()->getField($form, $model, 'string', '', '', [
                             'form_group_class' => 'col-sm-12 col-md-12 my-3', 
                             'class' => 'string',
-                            'remove_label' => true
+                            'remove_label' => true,
+                            'inputOptions' => [
+                                'autofocus' => 'autofocus',
+                                'tabindex' => '1'
+                            ]
                         ]); ?>
                     </div>
                     <div class="col-4">

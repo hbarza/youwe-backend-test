@@ -54,11 +54,20 @@
 }
 .string-analyzer .statistics th,
 .string-analyzer .statistics td {
-  font-size: 16px;
+  font-size: 18px;
   color: rgba(255, 255, 255, 0.8);
 }
 .string-analyzer .statistics-graph {
   background: #1f2251;
+}
+.string-analyzer .graph {
+  border-left: 1px solid #00bf9a;
+}
+.graph-block .parent {
+  font-size: 24px;
+}
+.graph-block .nodes {
+  font-size: 17px;
 }
 
 

@@ -28,16 +28,10 @@ class ResultAction extends Action
         $graphStatistics = $graph->getStatistics(false);
         end($graphStatistics);
 
-        dump($graphStatistics);
-
-        dump((new Result)->drawGraph($graph->getStatistics(false), ['t']));
-        exit;
-
         return $this->controller->render('/templates/result.phtml', [
             'string'     => $string,
             'statistics' => $graph->getStatistics(),
-            'graph'      => (new Result)->drawGraph($graph->getStatistics(false), array_keys($graph->getStatistics(false)))
-            // 'graph'      => '(new Result)->drawGraph($graph->getStatistics(false))'
+            'graph'      => (new Result)->drawGraph($graph->getStatistics(false), [key($graphStatistics)])
         ]);
     }
 }
