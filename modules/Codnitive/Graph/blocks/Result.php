@@ -1,6 +1,6 @@
 <?php 
 /**
- * Graph string analyzer form block
+ * Graph string analyzer result drow graph block
  *
  * @author Omid Barza <hbarza@gmail.com>
  */
@@ -10,6 +10,12 @@ use app\modules\Codnitive\Core\blocks\Template;
 
 class Result extends Template
 {
+    /**
+     * Drow analyzed string graph html
+     * 
+     * @param array graph statistics
+     * @return string
+     */
     public function drawGraph(array $graphStatistics): string
     {
         $html = '';
