@@ -61,32 +61,6 @@ class Graph
     }
 
     /**
-     * Returns traversed string statistics
-     * 
-     * @param bool $formatted 
-     * @return array
-     */
-    public function getStatistics(bool $formatted = true): array
-    {
-        if (!$formatted) {
-            return $this->_statistics;
-        }
-        
-        $statistics = [];
-        foreach ($this->_statistics as $nodeValue => $node) {
-            $statistics[$nodeValue] = [
-                'count' => $node['count'],
-                'before' => implode(',', array_unique($node['before'])),
-                'after' => implode(',', array_unique($node['after'])),
-                // we should plus sistance start point because distance is between 
-                // start and end points so we should exclude it from calculations
-                'max_distance' => ($node['count'] > 1) ? $node['distance_end'] - ($node['distance_start'] + 1) : null
-            ];
-        }
-        return $statistics;
-    }
-
-    /**
      * Add new graph node
      * 
      * @param app\modules\Codnitive\Graph\models\Graph\Node $node
@@ -194,6 +168,32 @@ class Graph
             ];
         }
         return $this;
+    }
+
+    /**
+     * Returns traversed string statistics
+     * 
+     * @param bool $formatted 
+     * @return array
+     */
+    public function getStatistics(bool $formatted = true): array
+    {
+        if (!$formatted) {
+            return $this->_statistics;
+        }
+        
+        $statistics = [];
+        foreach ($this->_statistics as $nodeValue => $node) {
+            $statistics[$nodeValue] = [
+                'count' => $node['count'],
+                'before' => implode(',', array_unique($node['before'])),
+                'after' => implode(',', array_unique($node['after'])),
+                // we should plus sistance start point because distance is between 
+                // start and end points so we should exclude it from calculations
+                'max_distance' => ($node['count'] > 1) ? $node['distance_end'] - ($node['distance_start'] + 1) : null
+            ];
+        }
+        return $statistics;
     }
 
 }
