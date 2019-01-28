@@ -1,5 +1,6 @@
 <?php 
 use app\modules\Codnitive\Graph\models\Graph;
+
 class GraphTest extends \Codeception\Test\Unit
 {
     /**
@@ -7,9 +8,18 @@ class GraphTest extends \Codeception\Test\Unit
      */
     protected $tester;
 
-
+    /**
+     * String to analyze
+     * 
+     * @var string
+     */
     protected $phrase = 'football vs soccer';
 
+    /**
+     * Expected traverse result
+     * 
+     * @var array
+     */
     protected $assertTraversedPhrase = [
         'f' => [
                 'count' => 1,
