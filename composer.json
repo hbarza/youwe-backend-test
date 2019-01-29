@@ -52,10 +52,12 @@
             "generateCookieValidationKey": [
                 "config/web.php"
             ],
-            "copyFiles": {
-                "nginx-local.conf-SMPL": "nginx-local.conf",
-                "config/db.php.SMPL": "config/db.php"
-            }
+            "copyFiles": [
+                {
+                    "nginx-local.conf-SMPL": "nginx-local.conf",
+                    "config/db.php.SMPL": "config/db.php"
+                }
+            ]
         }
     }
 }
