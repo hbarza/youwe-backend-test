@@ -4,7 +4,7 @@
     <br>
 </p>
 
-The poject includes Youwe "Poker Change" and "Phrase Analyzer" tests.
+The project includes Youwe "Poker Chance" and "Phrase Analyzer" tests.
 
 You can find a live version of test application on this address:
 [http://youwe.be.cooode.run/](http://youwe.be.cooode.run/)
@@ -43,14 +43,14 @@ Runflow:
 DIRECTORY STRUCTURE
 -------------------
 
-      modules/            contains test related modules and codes
+      modules/            contains related modules and codes
       tests/              contains tests for the poker and graph 
 
 Please note codes related to 'Assessment Development' placed in below directory:
 
 `modules/Codnitive`
 
-you can find 'Poker Change Calculator' under `Poker` module:
+you can find 'Poker Chance Calculator' under `Poker` module:
 
 `modules/Codnitive/Poker`
 
@@ -95,7 +95,7 @@ Also you should make a copy from `config/db.php-SMPL` to `config/db.php`
 
 
 **NOTES:**
-- but currently for current last version you don't neet to connect application to a database and creating a copy from file is enough.
+- Currently for latest version you don't need to connect application to a database and creating a copy from file is enough.
 
 
 TESTING
@@ -103,7 +103,7 @@ TESTING
 
 Tests are located in `tests` directory. They are developed with [Codeception PHP Testing Framework](http://codeception.com/).
 
-Unit test are located under `test\unit` directory:
+Unit tests are located under `test\unit` directory:
 
 - `PokerTest.php`
 - `GraphTest.php`
