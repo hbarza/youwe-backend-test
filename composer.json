@@ -46,13 +46,11 @@
                     "web/assets": "0777",
                     "yii": "0755"
                 }
-            ],
-            "copyFiles": [
-                {
-                    "nginx-local.conf-SMPL": "nginx-local.conf",
-                    "config/db.php-SMPL": "config/db.php"
-                }
             ]
+        },
+        "yii\\composer\\Installer::copyFiles": {
+            "nginx-local.conf-SMPL": "nginx-local.conf",
+            "config/db.php-SMPL": "config/db.php"
         },
         "yii\\composer\\Installer::postInstall": {
             "generateCookieValidationKey": [
