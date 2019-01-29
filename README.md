@@ -1,28 +1,63 @@
 <p align="center">
-    <img src="https://bilit.com/bus/uploads/config/logo.png" height="100px">
-    <h1 align="center">Bilit 2 Application</h1>
+    <h1 align="center">CODNITIVE</h1>
+    <h2 align="center">Youwe Backend Test</h2>
     <br>
 </p>
 
-The template contains the basic features including user login/logout, cart, checkout and product.
-It includes all commonly used configurations that would allow you to focus on adding new
-features to application.
+The poject includes Youwe "Poker Change" and "Phrase Analyzer" tests.
+
+You can find a live version of test application on this address:
+[http://youwe.be.cooode.run/](http://youwe.be.cooode.run/)
+
+### Test 1. Poker chance calculator
+Web application should calculate chance of getting desired card based on the amount of cards left.
+Use string notation to designate cards.
+
+Example:
+* H2-H10 - cards 2-10 of hearts
+* HJ - jack of hearts
+* HA - ace of hearts
+* SJ - jack of spades
+* DJ - jack of diamonds
+* CJ - jack of clubs
+  [suit][value]
+
+1. User should select a suit and a card rank.
+2. User starts drafting cards, one by one.
+3. Website should display a chance of getting customer selected card on the next Draft.
+
+If customer selected card is drafted website should display popup with a message "Got it, the chance was (current chance of getting the card)%" and reset to step 1.
+
+### Test 2: Phrase analyser
+Create a web application that will analyse customer input and provide some statistics.
+
+Runflow:
+1. Customer is asked to insert a string (not longer then 255 chars)
+2. Customer submits the data and receives a grid overview with character statistics.
+    - character symbol
+    - how many times character encountered.
+    - sibling character info: character was seen standing before [list of chars], after [list of chars], longest distance between chars is 10 (in case of 2 or more characters).
+
 
 
 DIRECTORY STRUCTURE
 -------------------
 
-      assets/             contains assets definition
-      commands/           contains console commands (controllers)
-      config/             contains application configurations
-      modules/            contains application modules and codes
-      mail/               contains view files for e-mails
-      runtime/            contains files generated during runtime
-      tests/              contains various tests for the basic application
-      vendor/             contains dependent 3rd-party packages
-      web/                contains the entry script and Web resources
+      modules/            contains test related modules and codes
+      tests/              contains tests for the poker and graph 
 
-Please note give 777 permisson to `runtime`, `web/assets` and `web/image` directories, or give group or user with write permission to these directories.
+Please note codes related to 'Assessment Development' placed in below directory:
+
+`modules/Codnitive`
+
+you can find 'Poker Change Calculator' under `Poker` module:
+
+`modules/Codnitive/Poker`
+
+and find 'Phrase Analyzer' under `Graph` module:
+
+`modules/Codintive/Graph`
+
 
 
 REQUIREMENTS
@@ -31,7 +66,6 @@ REQUIREMENTS
 The minimum requirement by this project:
 * PHP 7.2.X
 * Nginx 1.10 or higher
-* MySQL 5.7 or higher (Percona 5.7 is recommended)
 
 
 INSTALLATION
@@ -45,141 +79,47 @@ at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
 You can then install this project template using the following command:
 
 ~~~
-composer install
-or
-composer update
+composer create-project --prefer-dist codnitive/youwe-backend-test youwe
 ~~~
 
-Now you should be able to access the application through the following URL, assuming `basic` is the directory
-directly under the Web root.
 
-~~~
-http://localhost/basic/web/
-~~~
 
 CONFIGURATION
 -------------
 
+### Web Server
+You should make a copy from `nginx-local.conf-SMPL` to `nginx-local.conf` and config `server_name`, `root` and `fastcgi_pass` options as you need, if you are using nginx web server.
+
 ### Database
+Also you should make a copy from `config/db.php-SMPL` to `config/db.php`
 
-Edit the file `config/db.php` with real data, for example:
-
-```php
-return [
-    'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=bilit_com',
-    'username' => '<database_user>',
-    'password' => '<database_pass>',
-    'charset' => 'utf8',
-];
-```
 
 **NOTES:**
-- Yii won't create the database for you, this has to be done manually before you can access it.
-- Check and edit the other files in the `config/` directory to customize your application as required.
-- Refer to the README in the `tests` directory for information specific to basic application tests.
+- but currently for current last version you don't neet to connect application to a database and creating a copy from file is enough.
 
 
 TESTING
 -------
 
 Tests are located in `tests` directory. They are developed with [Codeception PHP Testing Framework](http://codeception.com/).
-By default there are 3 test suites:
 
-- `unit`
-- `functional`
-- `acceptance`
+Unit test are located under `test\unit` directory:
+
+- `PokerTest.php`
+- `GraphTest.php`
 
 Tests can be executed by running
 
 ```
-vendor/bin/codecept run
+php vendor/bin/codecept run unit
 ```
 
-The command above will execute unit and functional tests. Unit tests are testing the system components, while functional
-tests are for testing user interaction. Acceptance tests are disabled by default as they require additional setup since
-they perform testing in real browser. 
 
-
-### Running  acceptance tests
-
-To execute acceptance tests do the following:  
-
-1. Rename `tests/acceptance.suite.yml.example` to `tests/acceptance.suite.yml` to enable suite configuration
-
-2. Replace `codeception/base` package in `composer.json` with `codeception/codeception` to install full featured
-   version of Codeception
-
-3. Update dependencies with Composer 
-
-    ```
-    composer update  
-    ```
-
-4. Download [Selenium Server](http://www.seleniumhq.org/download/) and launch it:
-
-    ```
-    java -jar ~/selenium-server-standalone-x.xx.x.jar
-    ```
-
-    In case of using Selenium Server 3.0 with Firefox browser since v48 or Google Chrome since v53 you must download [GeckoDriver](https://github.com/mozilla/geckodriver/releases) or [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) and launch Selenium with it:
-
-    ```
-    # for Firefox
-    java -jar -Dwebdriver.gecko.driver=~/geckodriver ~/selenium-server-standalone-3.xx.x.jar
-    
-    # for Google Chrome
-    java -jar -Dwebdriver.chrome.driver=~/chromedriver ~/selenium-server-standalone-3.xx.x.jar
-    ``` 
-    
-    As an alternative way you can use already configured Docker container with older versions of Selenium and Firefox:
-    
-    ```
-    docker run --net=host selenium/standalone-firefox:2.53.0
-    ```
-
-5. (Optional) Create `yii2_basic_tests` database and update it by applying migrations if you have them.
-
-   ```
-   tests/bin/yii migrate
-   ```
-
-   The database configuration can be found at `config/test_db.php`.
-
-
-6. Start web server:
-
-    ```
-    tests/bin/yii serve
-    ```
-
-7. Now you can run all available tests
-
-   ```
-   # run all available tests
-   vendor/bin/codecept run
-
-   # run acceptance tests
-   vendor/bin/codecept run acceptance
-
-   # run only unit and functional tests
-   vendor/bin/codecept run unit,functional
-   ```
-
-### Code coverage support
-
-By default, code coverage is disabled in `codeception.yml` configuration file, you should uncomment needed rows to be able
-to collect code coverage. You can run your tests and collect coverage with the following command:
-
+The command above will execute all unit tests. If you need to run only specific test you can run this command:
 ```
-#collect coverage for all tests
-vendor/bin/codecept run -- --coverage-html --coverage-xml
-
-#collect coverage only for unit tests
-vendor/bin/codecept run unit -- --coverage-html --coverage-xml
-
-#collect coverage for unit and functional tests
-vendor/bin/codecept run functional,unit -- --coverage-html --coverage-xml
+php vendor/bin/codecept run unit PokerTest 
+``` 
+or bellow command to run Graph test:
 ```
-
-You can see code coverage output under the `tests/_output` directory.
+php vendor/bin/codecept run unit GraphTest
+```
