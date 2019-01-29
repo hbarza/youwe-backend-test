@@ -35,8 +35,7 @@
         ],
         "post-create-project-cmd": [
             "yii\\composer\\Installer::postCreateProject",
-            "yii\\composer\\Installer::postInstall",
-            "yii\\composer\\Installer::copyFiles"
+            "yii\\composer\\Installer::postInstall"
         ]
     },
     "extra": {
@@ -48,10 +47,6 @@
                     "yii": "0755"
                 }
             ]
-        },
-        "yii\\composer\\Installer::copyFiles": {
-            "nginx-local.conf-SMPL": "nginx-local.conf",
-            "config/db.php-SMPL": "config/db.php"
         },
         "yii\\composer\\Installer::postInstall": {
             "generateCookieValidationKey": [
